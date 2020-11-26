@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="IndividualRecord" representedClassName="IndividualRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="playerName" optional="YES" attributeType="String"/>
+        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="individualRecord" inverseEntity="Record"/>
+        <relationship name="statSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatSheet" inverseName="individualRecord" inverseEntity="StatSheet"/>
+    </entity>
+    <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="positionOnField" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="individualRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IndividualRecord" inverseName="record" inverseEntity="IndividualRecord"/>
+        <relationship name="teamRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamRecord" inverseName="record" inverseEntity="TeamRecord"/>
+    </entity>
+    <entity name="StatSheet" representedClassName="StatSheet" syncable="YES" codeGenerationType="class">
+        <attribute name="behinds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goals" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="handballs" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="kicks" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="marks" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tackles" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="individualRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IndividualRecord" inverseName="statSheet" inverseEntity="IndividualRecord"/>
+    </entity>
+    <entity name="TeamRecord" representedClassName="TeamRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="opponentLabel" optional="YES" attributeType="String"/>
+        <attribute name="teamLabel" optional="YES" attributeType="String"/>
+        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="teamRecord" inverseEntity="Record"/>
+        <relationship name="teamStatistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="teamRecord" inverseEntity="TeamStatistic"/>
+    </entity>
+    <entity name="TeamStatistic" representedClassName="TeamStatistic" syncable="YES" codeGenerationType="class">
+        <attribute name="opponentValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="statisticName" optional="YES" attributeType="String"/>
+        <attribute name="teamValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="teamRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamRecord" inverseName="teamStatistics" inverseEntity="TeamRecord"/>
+    </entity>
+    <elements>
+        <element name="IndividualRecord" positionX="117" positionY="36" width="128" height="88"/>
+        <element name="Player" positionX="-33.265625" positionY="102.4296875" width="128" height="88"/>
+        <element name="Record" positionX="-71.98046875" positionY="-59.6953125" width="128" height="118"/>
+        <element name="StatSheet" positionX="293.28125" positionY="72.30859375" width="128" height="148"/>
+        <element name="TeamRecord" positionX="99.421875" positionY="-122.11328125" width="128" height="103"/>
+        <element name="TeamStatistic" positionX="108" positionY="36" width="128" height="103"/>
+    </elements>
+</model>

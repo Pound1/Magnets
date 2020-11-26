@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ManageTutorialView" customModule="Matchday" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGJ-z3-QXb">
+                    <rect key="frame" x="87" y="820.5" width="240" height="30"/>
+                    <state key="normal" title="End"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Title Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQe-yJ-K6W">
+                    <rect key="frame" x="87" y="280" width="240" height="33.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TrY-g5-3yL">
+                    <rect key="frame" x="87" y="333.5" width="240" height="229"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="TrY-g5-3yL" secondAttribute="height" multiplier="240:229" id="UXc-xF-MnX"/>
+                    </constraints>
+                </imageView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="VJI-jO-Jwp">
+                    <rect key="frame" x="87" y="678.5" width="240" height="37"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TrY-g5-3yL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2IU-Sf-K2R"/>
+                <constraint firstItem="TrY-g5-3yL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="87" id="4xL-oC-fJc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rGJ-z3-QXb" secondAttribute="bottom" constant="11.5" id="8HQ-g0-p72"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VJI-jO-Jwp" secondAttribute="trailing" constant="87" id="9NO-Up-PBq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TrY-g5-3yL" secondAttribute="trailing" constant="87" id="9Wt-aC-put"/>
+                <constraint firstItem="nQe-yJ-K6W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="87" id="OwH-vR-QaB"/>
+                <constraint firstItem="TrY-g5-3yL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RjO-eV-3uc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rGJ-z3-QXb" secondAttribute="trailing" constant="87" id="RlA-VP-Vki"/>
+                <constraint firstItem="rGJ-z3-QXb" firstAttribute="top" secondItem="VJI-jO-Jwp" secondAttribute="bottom" constant="105" id="Tjt-S5-fcp"/>
+                <constraint firstItem="VJI-jO-Jwp" firstAttribute="top" secondItem="TrY-g5-3yL" secondAttribute="bottom" constant="116" id="bgo-IV-9BI"/>
+                <constraint firstItem="TrY-g5-3yL" firstAttribute="top" secondItem="nQe-yJ-K6W" secondAttribute="bottom" constant="20" id="bnh-Qr-6bG"/>
+                <constraint firstItem="rGJ-z3-QXb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="87" id="c5k-Wu-r4W"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nQe-yJ-K6W" secondAttribute="trailing" constant="87" id="rl3-gD-lv6"/>
+                <constraint firstItem="VJI-jO-Jwp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="87" id="vTg-uu-22G"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="ManageTutorialImageView" destination="TrY-g5-3yL" id="4Zy-sk-hWe"/>
+                <outlet property="ManageTutorialTitle" destination="nQe-yJ-K6W" id="2Ys-Rl-jcE"/>
+                <outlet property="pageControl" destination="VJI-jO-Jwp" id="o7Z-4S-fWV"/>
+                <outlet property="skipButton" destination="rGJ-z3-QXb" id="XhL-7Y-a1J"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="102.45535714285714"/>
+        </view>
+    </objects>
+</document>
