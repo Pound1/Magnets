@@ -26,7 +26,7 @@ class MatchInfoView: UIView {
     }()
     let teamScore: CustomMatchDetailView = {
        let view = CustomMatchDetailView()
-        view.detailLabel.text = "Glen Eira"
+        view.detailLabel.text = "Glen Eira WON"
         view.valueLabel.text = "7.12(54)"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -40,7 +40,7 @@ class MatchInfoView: UIView {
     }()
     let gameLength: CustomMatchDetailView = {
        let view = CustomMatchDetailView()
-        view.detailLabel.text = "Total Game Time"
+        view.detailLabel.text = "Match length"
         view.valueLabel.text = "2:15:12"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

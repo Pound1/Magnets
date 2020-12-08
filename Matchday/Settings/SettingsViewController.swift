@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
     let cellID = "CellID"
-    let settingsList = [["Club name": "Glen Eira"], ["Number of quarters": "4", "Length of quarters": "25 min"], ["Players on field": "18", "Players on bench": "4"], ]
+    let settingsList = [["Club name": "Glen Eira"], ["Number of quarters": "4", "Quarter Length": "25 min"], ["Players on field": "18", "Players on bench": "4"], ]
     override init(style: UITableView.Style) {
         super.init(style: .grouped)
     }
