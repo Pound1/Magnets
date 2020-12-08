@@ -99,9 +99,9 @@ extension MatchHistoryView {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! MatchHistoryCell
-        cell.textLabel?.text = "Game number: \(indexPath.row), vs Geelong"
+        cell.textLabel?.text = "GEFC vs \(indexPath.row)"
         cell.detailTextLabel?.text = "Oct 12, 2020"
-        cell.imageView?.backgroundColor = UIColor.PaletteColour.Green.softGreen
+        cell.imageView?.backgroundColor = getBackgroundColour(rowNumber: indexPath.row)
         return cell
     }
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -120,6 +120,14 @@ extension MatchHistoryView {
         let matchView = MatchDetailView()
         matchView.title = "Cell \(indexPath.row)"
         navigationController?.pushViewController(matchView, animated: true)
+    }
+    //MARK: Custom methods for TableView
+    func getBackgroundColour(rowNumber: Int) -> UIColor {
+        if rowNumber % 2 == 0 {
+            return UIColor.PaletteColour.Green.softGreen
+        } else {
+            return UIColor.PaletteColour.Red.primaryRed
+        }
     }
 }
 
