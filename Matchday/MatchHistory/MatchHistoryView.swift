@@ -62,7 +62,7 @@ class MatchHistoryView: UITableViewController {
             navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationController?.navigationBar.shadowImage = UIImage()
         }
-        self.tableView.separatorStyle = .none
+        self.tableView.separatorStyle = .singleLine
         tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         tableView.register(MatchHistoryCell.self, forCellReuseIdentifier: cellID)
         setUpTableViewElements()
@@ -95,13 +95,14 @@ class MatchHistoryView: UITableViewController {
 extension MatchHistoryView {
     //MARK: TableView methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 12
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! MatchHistoryCell
         cell.textLabel?.text = "GEFC vs \(indexPath.row)"
         cell.detailTextLabel?.text = "Oct 12, 2020"
         cell.imageView?.backgroundColor = getBackgroundColour(rowNumber: indexPath.row)
+//        cell.separatorInset = .zero
         return cell
     }
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
