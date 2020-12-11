@@ -20,9 +20,8 @@ class MatchDetailView: UIViewController  {
         setUpView()
     }
     
-    let informationView: MatchInfoView = {
-        let view = MatchInfoView()
-        view.matchResult.tintColor = UIColor.PaletteColour.Green.darkGreen
+    let informationView: MatchDetailInformationView = {
+        let view = MatchDetailInformationView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,7 +32,7 @@ class MatchDetailView: UIViewController  {
 //        layout.headerReferenceSize = CGSize(width: 100, height: 68)
         layout.itemSize = CGSize(width: 10, height: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = collectionView.provideBackgroundColour()
+        collectionView.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -42,12 +41,12 @@ class MatchDetailView: UIViewController  {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = tableView.provideBackgroundColour()
+        tableView.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         return tableView
     }()
     
     func setUpView() {
-        view.backgroundColor = view.provideBackgroundColour()
+        view.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         navigationController?.isNavigationBarHidden = false
         setUpInformationView()
         setUpCollectionView()
@@ -78,8 +77,8 @@ class MatchDetailView: UIViewController  {
         NSLayoutConstraint.activate([
             informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             informationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            informationView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-            informationView.heightAnchor.constraint(equalToConstant: 150),
+            informationView.topAnchor.constraint(equalTo: view.topAnchor),
+            informationView.heightAnchor.constraint(equalToConstant: 50),
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -107,7 +106,6 @@ extension MatchDetailView: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listCell, for: indexPath) as! RowCell
-        cell.backgroundColor = view.provideBackgroundColour()
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
