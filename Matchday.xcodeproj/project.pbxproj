@@ -78,6 +78,7 @@
 		51ED53B6242E10A7006A3762 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED53B5242E10A7006A3762 /* DateExtensions.swift */; };
 		51F09FF6234218F200DD10A9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F09FF5234218F200DD10A9 /* CoreDataManager.swift */; };
 		51F09FF8234857F200DD10A9 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F09FF7234857F200DD10A9 /* RecordCell.swift */; };
+		51FF3D15258209400096AEC6 /* MatchDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FF3D14258209400096AEC6 /* MatchDetailInformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,7 @@
 		51ED53B5242E10A7006A3762 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		51F09FF5234218F200DD10A9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		51F09FF7234857F200DD10A9 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		51FF3D14258209400096AEC6 /* MatchDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailInformationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,10 +248,11 @@
 			isa = PBXGroup;
 			children = (
 				51B4D5B3251B0FE40014ED33 /* MatchDetailView.swift */,
-				51045E19251C3383002B458D /* MatchInfoView.swift */,
+				51FF3D14258209400096AEC6 /* MatchDetailInformationView.swift */,
 				51045E16251C1A0A002B458D /* RowCell.swift */,
 				5198B6C4251DA72300D5905D /* QuarterCell.swift */,
 				5198B6C8251DAECB00D5905D /* MatchTableViewHeaderCell.swift */,
+				51045E19251C3383002B458D /* MatchInfoView.swift */,
 			);
 			path = MatchDetailView;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				51ED53B6242E10A7006A3762 /* DateExtensions.swift in Sources */,
 				516531152337786A000A2D87 /* CreateStatSheetController.swift in Sources */,
 				51C896B6253DAACF005502FA /* EditSettingController.swift in Sources */,
+				51FF3D15258209400096AEC6 /* MatchDetailInformationView.swift in Sources */,
 				51CF593322E038A400A02F61 /* ColorExtensions.swift in Sources */,
 				51B6471B232A6C9A00661AB9 /* StatisticSheetController.swift in Sources */,
 				51B4D5B7251B104D0014ED33 /* ViewExtensions.swift in Sources */,
