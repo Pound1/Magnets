@@ -27,6 +27,8 @@ extension UIColor {
             static let softGreen = UIColor(displayP3Red: 200/255, green: 242/255, blue: 207/255, alpha: 1)
             static let lightGreen = UIColor(displayP3Red: 0/255, green: 224/255, blue: 127/255, alpha: 1)
             static let darkGreen = UIColor(displayP3Red: 7/255, green: 64/255, blue: 21/255, alpha: 1)
+            
+            static let newGreen = UIColor(displayP3Red: 94/255, green: 170/255, blue: 69/255, alpha: 1)
         }
         struct Red {
             static let primaryRed = UIColor(displayP3Red: 237/255, green: 85/255, blue: 59/255, alpha: 1)
