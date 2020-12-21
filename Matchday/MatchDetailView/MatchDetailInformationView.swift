@@ -137,7 +137,7 @@ class MatchDetailInformationView: UIView {
     
     private func setConstraints(){
         print("configuring contents")
-        backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
+        backgroundColor = UIColor.clear
         
         addSubview(homeTeamLabel)
         addSubview(opponentTeamLabel)

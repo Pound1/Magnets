@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //set the navigation appearance for iOS 13 or below
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor.PaletteColour.Green.primaryDarkColor
+        UINavigationBar.appearance().barTintColor = UIColor.PaletteColour.Green.newGreen
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().prefersLargeTitles = true
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
+            navBarAppearance.backgroundColor = UIColor.PaletteColour.Green.newGreen
             
             //MARK: Default iOS view
 //            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.label]

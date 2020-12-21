@@ -20,6 +20,13 @@ class MatchDetailView: UIViewController  {
         setUpView()
     }
     
+    let seperatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.PaletteColour.Green.newGreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let informationView: MatchDetailInformationView = {
         let view = MatchDetailInformationView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +39,7 @@ class MatchDetailView: UIViewController  {
 //        layout.headerReferenceSize = CGSize(width: 100, height: 68)
         layout.itemSize = CGSize(width: 10, height: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
+        collectionView.backgroundColor = UIColor.clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -41,12 +48,12 @@ class MatchDetailView: UIViewController  {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
+        tableView.backgroundColor = UIColor.clear
         return tableView
     }()
     
     func setUpView() {
-        view.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
+        view.backgroundColor = UIColor.PaletteColour.Green.newGreen
         navigationController?.isNavigationBarHidden = false
         setUpInformationView()
         setUpCollectionView()
@@ -55,11 +62,11 @@ class MatchDetailView: UIViewController  {
     }
     private func setUpInformationView() {
         view.addSubview(informationView)
+        view.addSubview(seperatorView)
     }
     private func setUpCollectionView() {
         view.addSubview(collectionView)
         collectionView.isScrollEnabled = true
-//        collectionView.
         collectionView.register(QuarterCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCell)
         collectionView.dataSource = self
@@ -75,10 +82,16 @@ class MatchDetailView: UIViewController  {
     private func activateConstraints() {
 //        let definedThird = view.frame.height/3
         NSLayoutConstraint.activate([
+            
             informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             informationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             informationView.topAnchor.constraint(equalTo: view.topAnchor),
-            informationView.heightAnchor.constraint(equalToConstant: 50),
+            informationView.heightAnchor.constraint(equalToConstant: 100),
+            
+            seperatorView.leadingAnchor.constraint(equalTo: informationView.leadingAnchor),
+            seperatorView.trailingAnchor.constraint(equalTo: informationView.trailingAnchor),
+            seperatorView.topAnchor.constraint(equalTo: informationView.topAnchor),
+            seperatorView.heightAnchor.constraint(equalToConstant: 1),
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
