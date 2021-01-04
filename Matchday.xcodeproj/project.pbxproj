@@ -40,6 +40,7 @@
 		51A7E970234F5D1D00529352 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A7E96F234F5D1D00529352 /* SummaryView.swift */; };
 		51A87222236994E90025D6B9 /* NoTeamAvailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A87221236994E90025D6B9 /* NoTeamAvailableView.swift */; };
 		51A872242369B11B0025D6B9 /* ManageFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A872232369B11B0025D6B9 /* ManageFieldController.swift */; };
+		51AAA9AE25A33F4400574DDE /* ControlBookHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AAA9AD25A33F4400574DDE /* ControlBookHeaderView.swift */; };
 		51B4D5A8251ADB5D0014ED33 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B4D5A7251ADB5D0014ED33 /* HomeView.swift */; };
 		51B4D5AD251AFAF80014ED33 /* HomeDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B4D5AC251AFAF80014ED33 /* HomeDisplayView.swift */; };
 		51B4D5B0251AFF8D0014ED33 /* MatchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B4D5AF251AFF8D0014ED33 /* MatchHistoryCell.swift */; };
@@ -120,6 +121,7 @@
 		51A7E96F234F5D1D00529352 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		51A87221236994E90025D6B9 /* NoTeamAvailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTeamAvailableView.swift; sourceTree = "<group>"; };
 		51A872232369B11B0025D6B9 /* ManageFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFieldController.swift; sourceTree = "<group>"; };
+		51AAA9AD25A33F4400574DDE /* ControlBookHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBookHeaderView.swift; sourceTree = "<group>"; };
 		51B4D5A7251ADB5D0014ED33 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		51B4D5AC251AFAF80014ED33 /* HomeDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDisplayView.swift; sourceTree = "<group>"; };
 		51B4D5AF251AFF8D0014ED33 /* MatchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistoryCell.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				51DACC8B25917A1800F2BE85 /* TimerPageVC.swift */,
 				51DACC882591796600F2BE85 /* ScorePageVC.swift */,
 				51DACC852591758D00F2BE85 /* StatisticPageViewController.swift */,
+				51AAA9AD25A33F4400574DDE /* ControlBookHeaderView.swift */,
 			);
 			path = "Control Book";
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				519D0FFB2363A85000D0D28C /* ManageMatchController.swift in Sources */,
 				5100728623E980E300894EB5 /* PlayingFieldCell.swift in Sources */,
 				510E0F89230A075E0007FAC1 /* RotationDataModel.swift in Sources */,
+				51AAA9AE25A33F4400574DDE /* ControlBookHeaderView.swift in Sources */,
 				51D279FD253D965C0072EB92 /* MatchHistoryView.swift in Sources */,
 				51C896C0253EA520005502FA /* FilterHeaderCell.swift in Sources */,
 				51653119233783CD000A2D87 /* StatisticRecord+CoreDataProperties.swift in Sources */,
