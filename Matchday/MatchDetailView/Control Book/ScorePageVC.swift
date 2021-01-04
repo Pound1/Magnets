@@ -49,8 +49,8 @@ class ScorePageVC: UIViewController {
         NSLayoutConstraint.activate([
 //            clockImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             clockImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            clockImage.widthAnchor.constraint(equalToConstant: 40),
-            clockImage.heightAnchor.constraint(equalToConstant: 40),
+            clockImage.widthAnchor.constraint(equalToConstant: 30),
+            clockImage.heightAnchor.constraint(equalToConstant: 30),
             clockImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             
             controllerPageTitle.leadingAnchor.constraint(equalTo: clockImage.trailingAnchor, constant: 20),

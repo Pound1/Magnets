@@ -27,8 +27,8 @@ class ControlBookHeaderView: UIView {
         NSLayoutConstraint.activate([
             image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
 //            image.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            image.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-//            image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
+//            image.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+            image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
             image.widthAnchor.constraint(equalToConstant: 30),
             image.heightAnchor.constraint(equalToConstant: 30),
         ])
