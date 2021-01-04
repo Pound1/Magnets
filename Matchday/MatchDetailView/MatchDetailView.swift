@@ -19,6 +19,13 @@ class MatchDetailView: UIViewController  {
         super.viewDidLoad()
         setUpView()
     }
+    let whiteBackdropForCustomTabBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    let controlBook = ControlBookViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
     
     let seperatorView: UIView = {
         let view = UIView()
@@ -57,12 +64,21 @@ class MatchDetailView: UIViewController  {
         navigationController?.isNavigationBarHidden = false
         setUpInformationView()
         setUpCollectionView()
-        setUpTableView()
+        setUpControlBook()
+//        setUpTableView()
         activateConstraints()
+    }
+    private func setUpControlBook() {
+        addChild(controlBook)
+        view.addSubview(controlBook.view)
+        controlBook.didMove(toParent: self)
+        controlBook.view.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     private func setUpInformationView() {
         view.addSubview(informationView)
         view.addSubview(seperatorView)
+        view.addSubview(whiteBackdropForCustomTabBar)
     }
     private func setUpCollectionView() {
         view.addSubview(collectionView)
@@ -98,10 +114,20 @@ class MatchDetailView: UIViewController  {
             collectionView.topAnchor.constraint(equalTo: informationView.bottomAnchor, constant: 16),
             collectionView.heightAnchor.constraint(equalToConstant: 120),
             
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            controlBook.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            controlBook.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            controlBook.view.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            controlBook.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            whiteBackdropForCustomTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            whiteBackdropForCustomTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            whiteBackdropForCustomTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            whiteBackdropForCustomTabBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             ])
     }
 }
