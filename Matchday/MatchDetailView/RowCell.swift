@@ -19,7 +19,7 @@ class RowCell: UITableViewCell {
     }
     
     private func setUpCell() {
-        backgroundColor = .brown
+        backgroundColor = provideBackgroundColour()
         textLabel?.text = "Label"
         detailTextLabel?.text = "details"
     }

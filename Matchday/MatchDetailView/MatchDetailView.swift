@@ -19,10 +19,23 @@ class MatchDetailView: UIViewController  {
         super.viewDidLoad()
         setUpView()
     }
+    let whiteBackdropForCustomTabBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    let controlBook = ControlBookViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
     
-    let informationView: MatchInfoView = {
-        let view = MatchInfoView()
-        view.matchResult.tintColor = UIColor.PaletteColour.Green.darkGreen
+    let seperatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.PaletteColour.Green.newGreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let informationView: MatchDetailInformationView = {
+        let view = MatchDetailInformationView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,7 +46,7 @@ class MatchDetailView: UIViewController  {
 //        layout.headerReferenceSize = CGSize(width: 100, height: 68)
         layout.itemSize = CGSize(width: 10, height: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = collectionView.provideBackgroundColour()
+        collectionView.backgroundColor = UIColor.clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -42,25 +55,34 @@ class MatchDetailView: UIViewController  {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = tableView.provideBackgroundColour()
+        tableView.backgroundColor = UIColor.clear
         return tableView
     }()
     
     func setUpView() {
-        view.backgroundColor = view.provideBackgroundColour()
+        view.backgroundColor = UIColor.PaletteColour.Green.newGreen
         navigationController?.isNavigationBarHidden = false
         setUpInformationView()
         setUpCollectionView()
-        setUpTableView()
+        setUpControlBook()
+//        setUpTableView()
         activateConstraints()
+    }
+    private func setUpControlBook() {
+        addChild(controlBook)
+        view.addSubview(controlBook.view)
+        controlBook.didMove(toParent: self)
+        controlBook.view.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     private func setUpInformationView() {
         view.addSubview(informationView)
+        view.addSubview(seperatorView)
+        view.addSubview(whiteBackdropForCustomTabBar)
     }
     private func setUpCollectionView() {
         view.addSubview(collectionView)
         collectionView.isScrollEnabled = true
-//        collectionView.
         collectionView.register(QuarterCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCell)
         collectionView.dataSource = self
@@ -76,20 +98,36 @@ class MatchDetailView: UIViewController  {
     private func activateConstraints() {
 //        let definedThird = view.frame.height/3
         NSLayoutConstraint.activate([
+            
             informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             informationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            informationView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-            informationView.heightAnchor.constraint(equalToConstant: 150),
+            informationView.topAnchor.constraint(equalTo: view.topAnchor),
+            informationView.heightAnchor.constraint(equalToConstant: 100),
+            
+            seperatorView.leadingAnchor.constraint(equalTo: informationView.leadingAnchor),
+            seperatorView.trailingAnchor.constraint(equalTo: informationView.trailingAnchor),
+            seperatorView.topAnchor.constraint(equalTo: informationView.topAnchor),
+            seperatorView.heightAnchor.constraint(equalToConstant: 1),
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: informationView.bottomAnchor, constant: 16),
             collectionView.heightAnchor.constraint(equalToConstant: 120),
             
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            controlBook.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            controlBook.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            controlBook.view.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            controlBook.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            whiteBackdropForCustomTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            whiteBackdropForCustomTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            whiteBackdropForCustomTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            whiteBackdropForCustomTabBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             ])
     }
 }
@@ -107,7 +145,6 @@ extension MatchDetailView: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listCell, for: indexPath) as! RowCell
-        cell.backgroundColor = view.provideBackgroundColour()
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

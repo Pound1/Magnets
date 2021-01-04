@@ -57,9 +57,9 @@ class QuarterCell: UICollectionViewCell {
     
     private func setUpCell() {
         if #available(iOS 13.0, *) {
-            backgroundColor = .systemGray4
+            backgroundColor = UIColor.systemBackground
         } else {
-            backgroundColor = .gray
+            backgroundColor = .white
         }
         layer.cornerRadius = 10
         layer.masksToBounds = true
