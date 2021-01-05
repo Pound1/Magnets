@@ -31,7 +31,8 @@ class ControlBookViewController: UIPageViewController {
         view.backgroundColor = UIColor.PaletteColour.Green.newGreen
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
-        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+//        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner] // Rounds both top corners
+        view.layer.maskedCorners = [.layerMinXMinYCorner] // Rounds left top corner
         dataSource = self
         delegate = self
         if let firstVC = orderedViewControllers.first {
@@ -51,7 +52,7 @@ class ControlBookViewController: UIPageViewController {
         ])
     }
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [viewC3, viewC2, viewC]
+        return [viewC, viewC3, viewC2]
     }()
     private func newColoredViewController(color: String) -> UIViewController {
         let view = UIViewController()
