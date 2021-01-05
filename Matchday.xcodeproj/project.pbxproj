@@ -11,6 +11,8 @@
 		51018C282477DC27008BF96A /* EntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51018C272477DC27008BF96A /* EntryField.swift */; };
 		51045E17251C1A0A002B458D /* RowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51045E16251C1A0A002B458D /* RowCell.swift */; };
 		51045E1A251C3383002B458D /* MatchInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51045E19251C3383002B458D /* MatchInfoView.swift */; };
+		51086DFA25A3CD1100BE6782 /* StatisticHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51086DF925A3CD1100BE6782 /* StatisticHeaderViewCell.swift */; };
+		51086DFD25A3E89A00BE6782 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51086DFC25A3E89A00BE6782 /* StatisticTableViewCell.swift */; };
 		510E0F7E22FC00410007FAC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E0F7D22FC00410007FAC1 /* Service.swift */; };
 		510E0F802302B4C50007FAC1 /* MatchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E0F7F2302B4C50007FAC1 /* MatchCollectionViewController.swift */; };
 		510E0F832303FAAC0007FAC1 /* MatchCollectionViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E0F822303FAAC0007FAC1 /* MatchCollectionViewControllerExtensions.swift */; };
@@ -91,6 +93,8 @@
 		51018C272477DC27008BF96A /* EntryField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryField.swift; sourceTree = "<group>"; };
 		51045E16251C1A0A002B458D /* RowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowCell.swift; sourceTree = "<group>"; };
 		51045E19251C3383002B458D /* MatchInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchInfoView.swift; sourceTree = "<group>"; };
+		51086DF925A3CD1100BE6782 /* StatisticHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticHeaderViewCell.swift; sourceTree = "<group>"; };
+		51086DFC25A3E89A00BE6782 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
 		510E0F7D22FC00410007FAC1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		510E0F7F2302B4C50007FAC1 /* MatchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewController.swift; sourceTree = "<group>"; };
 		510E0F822303FAAC0007FAC1 /* MatchCollectionViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -399,6 +403,8 @@
 				51DACC8B25917A1800F2BE85 /* TimerPageVC.swift */,
 				51DACC882591796600F2BE85 /* ScorePageVC.swift */,
 				51DACC852591758D00F2BE85 /* StatisticPageViewController.swift */,
+				51086DF925A3CD1100BE6782 /* StatisticHeaderViewCell.swift */,
+				51086DFC25A3E89A00BE6782 /* StatisticTableViewCell.swift */,
 				51AAA9AD25A33F4400574DDE /* ControlBookHeaderView.swift */,
 			);
 			path = "Control Book";
@@ -525,6 +531,7 @@
 				51045E17251C1A0A002B458D /* RowCell.swift in Sources */,
 				51D2B41622F8472200FE6C41 /* PositionOnFieldCell.swift in Sources */,
 				51B4D5B0251AFF8D0014ED33 /* MatchHistoryCell.swift in Sources */,
+				51086DFD25A3E89A00BE6782 /* StatisticTableViewCell.swift in Sources */,
 				51CF591F22E02EE100A02F61 /* AppDelegate.swift in Sources */,
 				51FF3D1925904AA10096AEC6 /* ControlBookViewController.swift in Sources */,
 				51BD4DE9237D67300057905D /* AddToFieldCell.swift in Sources */,
@@ -542,6 +549,7 @@
 				51C896B6253DAACF005502FA /* EditSettingController.swift in Sources */,
 				51FF3D15258209400096AEC6 /* MatchDetailInformationView.swift in Sources */,
 				51CF593322E038A400A02F61 /* ColorExtensions.swift in Sources */,
+				51086DFA25A3CD1100BE6782 /* StatisticHeaderViewCell.swift in Sources */,
 				51B6471B232A6C9A00661AB9 /* StatisticSheetController.swift in Sources */,
 				51B4D5B7251B104D0014ED33 /* ViewExtensions.swift in Sources */,
 				51BD4DEB237D6DF40057905D /* ManagePlayerDetailView.swift in Sources */,
