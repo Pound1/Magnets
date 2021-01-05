@@ -13,7 +13,7 @@ class ScorePageVC: UIViewController {
     let clockImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(imageLiteralResourceName: "goal_posts").withRenderingMode(.alwaysTemplate)
+        imageView.image = UIImage(imageLiteralResourceName: "rotation_icon").withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor.PaletteColour.Green.newGreen
         return imageView
     }()
