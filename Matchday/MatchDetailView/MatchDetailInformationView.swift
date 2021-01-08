@@ -27,7 +27,7 @@ class MatchDetailInformationView: UIView {
     var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "some date"
+        label.text = "8/8/20"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 12)
         if #available(iOS 13.0, *) {
@@ -42,7 +42,7 @@ class MatchDetailInformationView: UIView {
     let homeTeamLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "some home team"
+        label.text = "Kangaroos FC"
         label.numberOfLines = 3
         label.font = UIFont.boldSystemFont(ofSize: 26)
         label.adjustsFontSizeToFitWidth = true
@@ -60,7 +60,7 @@ class MatchDetailInformationView: UIView {
     let opponentTeamLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "some opponent"
+        label.text = "EFC"
         label.textAlignment = .right
         label.numberOfLines = 3
         label.font = UIFont.boldSystemFont(ofSize: 26)
@@ -78,7 +78,7 @@ class MatchDetailInformationView: UIView {
     let homeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "My team"
+        label.text = "1.8 (14)"
         label.font = UIFont.systemFont(ofSize: 16)
         if #available(iOS 13.0, *) {
             label.textColor = .tertiaryLabel
@@ -92,7 +92,7 @@ class MatchDetailInformationView: UIView {
     let opponentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Opponent"
+        label.text = "3.1 (19)"
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 16)
         if #available(iOS 13.0, *) {

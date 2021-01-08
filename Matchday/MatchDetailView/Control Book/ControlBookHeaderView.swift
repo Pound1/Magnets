@@ -25,12 +25,17 @@ class ControlBookHeaderView: UIView {
     func setUpView() {
         addSubview(image)
         NSLayoutConstraint.activate([
-            image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-//            image.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-//            image.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
+            // left align the image
+//            image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+//            image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
+//            image.widthAnchor.constraint(equalToConstant: 30),
+//            image.heightAnchor.constraint(equalToConstant: 30),
+            
+            // center the image
+            image.centerXAnchor.constraint(equalTo: centerXAnchor),
             image.widthAnchor.constraint(equalToConstant: 30),
             image.heightAnchor.constraint(equalToConstant: 30),
+            image.topAnchor.constraint(equalTo: topAnchor, constant: 16)
         ])
     }
     

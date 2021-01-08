@@ -23,7 +23,7 @@ class ControlBookViewController: UIPageViewController {
         return control
     }()
     let viewC = StatisticPageViewController()
-    let viewC2 = ScorePageVC()
+    let viewC2 = RotationsPageVC()
     let viewC3 = TimerPageVC()
 
     //MARK: Private Methods
@@ -52,7 +52,7 @@ class ControlBookViewController: UIPageViewController {
         ])
     }
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [viewC, viewC3, viewC2]
+        return [viewC2, viewC3, viewC]
     }()
     private func newColoredViewController(color: String) -> UIViewController {
         let view = UIViewController()

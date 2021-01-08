@@ -10,15 +10,13 @@ import UIKit
 
 class MatchDetailView: UIViewController  {
     
+    
+    //MARK: Properties
     let cellID = "cellID"
     let headerCell = "headerCell"
     let listCell = "listCell"
     let tableViewHeader = "tableViewHeader"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpView()
-    }
     let whiteBackdropForCustomTabBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +31,7 @@ class MatchDetailView: UIViewController  {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+    let selectedCell = 0
     let informationView: MatchDetailInformationView = {
         let view = MatchDetailInformationView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +47,7 @@ class MatchDetailView: UIViewController  {
         collectionView.backgroundColor = UIColor.clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.allowsSelection = true
         return collectionView
     }()
     
@@ -59,6 +58,12 @@ class MatchDetailView: UIViewController  {
         return tableView
     }()
     
+    //MARK: Setup methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpView()
+    }
     func setUpView() {
         view.backgroundColor = UIColor.PaletteColour.Green.newGreen
         navigationController?.isNavigationBarHidden = false
@@ -170,10 +175,28 @@ extension MatchDetailView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! QuarterCell
         if indexPath.row == 0 {
             cell.cellTitle.text = "Total"
+            cell.showSelectedCell()
         } else {
             cell.cellTitle.text = "Q\(indexPath.row)"
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? QuarterCell {
+            cell.showSelectedCell()
+        }
+        if indexPath.row != 0 { // this removes the highlight on the auto-selected cell when the view loads.
+            let index = IndexPath(row: 0, section: 0)
+            if let cell = collectionView.cellForItem(at: index) as? QuarterCell {
+                cell.hideSelectedCell()
+            }
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? QuarterCell {
+            cell.hideSelectedCell()
+        }
     }
 }
 
