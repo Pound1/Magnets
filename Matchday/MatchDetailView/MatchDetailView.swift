@@ -40,7 +40,7 @@ class MatchDetailView: UIViewController  {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+//        layout.scrollDirection = .horizontal
 //        layout.headerReferenceSize = CGSize(width: 100, height: 68)
         layout.itemSize = CGSize(width: 10, height: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -168,17 +168,13 @@ extension MatchDetailView: UITableViewDataSource {
 //MARK: CollectionView methods
 extension MatchDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! QuarterCell
-        if indexPath.row == 0 {
-            cell.cellTitle.text = "Total"
-            cell.showSelectedCell()
-        } else {
-            cell.cellTitle.text = "Q\(indexPath.row)"
-        }
+        let quarterNumber = indexPath.row + 1
+        cell.cellTitle.text = "Q\(quarterNumber)"
         return cell
     }
     
@@ -202,7 +198,9 @@ extension MatchDetailView: UICollectionViewDataSource {
 
 extension MatchDetailView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        let widthOfView = view.frame.width
+        let widthOfTile = (widthOfView-50)/4
+        return CGSize(width: widthOfTile, height: widthOfTile)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
@@ -212,8 +210,8 @@ extension MatchDetailView: UICollectionViewDelegateFlowLayout {
         return 10
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let customInset = UIEdgeInsets(top: 4, left: 10, bottom: 10, right: 4)
-        return customInset
+        let customInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return customInsets
     }
 }
 
