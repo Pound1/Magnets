@@ -119,7 +119,7 @@ extension MatchHistoryView {
         print("taped agraldkj \(indexPath.row)")
         // create a page and display it on the nav stack
         let matchView = MatchDetailView()
-        matchView.title = "Match data \(indexPath.row)"
+        matchView.title = "EFC vs OAFC"
         navigationController?.pushViewController(matchView, animated: true)
     }
     //MARK: Custom methods for TableView

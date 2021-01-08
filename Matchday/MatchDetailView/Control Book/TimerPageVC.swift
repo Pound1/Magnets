@@ -40,6 +40,7 @@ class TimerPageVC: UIViewController {
         addConstraints()
         tableView.dataSource = self
         tableView.delegate = self
+        self.tableView.tableFooterView = UIView()
     }
     
     private func setUpView() {
@@ -91,6 +92,8 @@ extension TimerPageVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cellID")
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 16)
         if indexPath.section == 0 {
             cell.detailTextLabel?.text = dataArray[indexPath.row][1]
             cell.textLabel?.text = dataArray[indexPath.row][0]
