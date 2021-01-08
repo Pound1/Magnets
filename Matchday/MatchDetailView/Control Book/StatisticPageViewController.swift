@@ -43,12 +43,14 @@ class StatisticPageViewController: UIViewController {
         addConstraints()
         tableView.dataSource = self
         tableView.delegate = self
+        self.tableView.tableFooterView = UIView()
     }
     
     private func setUpView() {
         view.backgroundColor = view.provideBackgroundColour()
         fetchStatSheets()
         view.addSubview(statsImage)
+        view.addSubview(controllerPageTitle)
         view.addSubview(tableView)
         
 //        view.addSubview(controllerPageTitle)
@@ -64,7 +66,6 @@ class StatisticPageViewController: UIViewController {
             let stats = try context.fetch(fetchRequest)
     
             self.statisticArray = stats
-            print("retrieved Stats: ", statisticArray)
 //            self.statisticArray.sort{$0.created!.compare($1.created!) == .orderedDescending}
             self.tableView.reloadData()
             
@@ -80,10 +81,10 @@ class StatisticPageViewController: UIViewController {
             statsImage.heightAnchor.constraint(equalToConstant: 25),
             statsImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
 //
-//            controllerPageTitle.leadingAnchor.constraint(equalTo: clockImage.trailingAnchor, constant: 20),
-//            controllerPageTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            controllerPageTitle.centerYAnchor.constraint(equalTo: clockImage.centerYAnchor),
-//            controllerPageTitle.heightAnchor.constraint(equalToConstant: 50),
+            controllerPageTitle.leadingAnchor.constraint(equalTo: statsImage.trailingAnchor, constant: 20),
+            controllerPageTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            controllerPageTitle.centerYAnchor.constraint(equalTo: statsImage.centerYAnchor),
+            controllerPageTitle.heightAnchor.constraint(equalToConstant: 50),
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
