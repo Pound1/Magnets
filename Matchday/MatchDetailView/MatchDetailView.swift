@@ -175,6 +175,9 @@ extension MatchDetailView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! QuarterCell
         let quarterNumber = indexPath.row + 1
         cell.cellTitle.text = "Q\(quarterNumber)"
+        if indexPath.row == 0 {
+            cell.showSelectedCell()
+        }
         return cell
     }
     

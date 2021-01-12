@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="IndividualRecord" representedClassName="IndividualRecord" syncable="YES" codeGenerationType="class">
         <attribute name="playerName" optional="YES" attributeType="String"/>
         <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="individualRecord" inverseEntity="Record"/>
         <relationship name="statSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatSheet" inverseName="individualRecord" inverseEntity="StatSheet"/>
+    </entity>
+    <entity name="Match" representedClassName="Match" syncable="YES" codeGenerationType="class">
+        <attribute name="awayTeam" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="homeTeam" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -16,6 +24,11 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="individualRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IndividualRecord" inverseName="record" inverseEntity="IndividualRecord"/>
         <relationship name="teamRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamRecord" inverseName="record" inverseEntity="TeamRecord"/>
+    </entity>
+    <entity name="Score" representedClassName="Score" syncable="YES" codeGenerationType="class">
+        <attribute name="goalTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pointTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="StatSheet" representedClassName="StatSheet" syncable="YES" codeGenerationType="class">
         <attribute name="behinds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -45,5 +58,7 @@
         <element name="StatSheet" positionX="293.28125" positionY="72.30859375" width="128" height="148"/>
         <element name="TeamRecord" positionX="99.421875" positionY="-122.11328125" width="128" height="103"/>
         <element name="TeamStatistic" positionX="108" positionY="36" width="128" height="103"/>
+        <element name="Match" positionX="108" positionY="36" width="128" height="119"/>
+        <element name="Score" positionX="117" positionY="45" width="128" height="74"/>
     </elements>
 </model>

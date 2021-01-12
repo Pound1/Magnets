@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class MatchHistoryView: UITableViewController {
     
     //MARK: Properties
     let cellID = "cellID"
+    var matches = [Match]()
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Recent", "Won", "Lost"])
         control.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +56,7 @@ class MatchHistoryView: UITableViewController {
         super.viewDidLoad()
         segmentedControl.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         segmentedControl.tintColor = .black
+        fetchMatches()
         navigationItem.title = "Matches"
         if #available(iOS 13.0, *) {
             navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .clear
@@ -63,6 +66,8 @@ class MatchHistoryView: UITableViewController {
             navigationController?.navigationBar.shadowImage = UIImage()
         }
         self.tableView.separatorStyle = .singleLine
+        self.tableView.estimatedRowHeight = 80
+        self.tableView.rowHeight = UITableView.automaticDimension
         tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         tableView.register(MatchHistoryCell.self, forCellReuseIdentifier: cellID)
         setUpTableViewElements()
@@ -95,14 +100,15 @@ class MatchHistoryView: UITableViewController {
 extension MatchHistoryView {
     //MARK: TableView methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return matches.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! MatchHistoryCell
-        cell.textLabel?.text = "GEFC vs \(indexPath.row)"
-        cell.detailTextLabel?.text = "Oct 12, 2020"
-        cell.imageView?.backgroundColor = getBackgroundColour(rowNumber: indexPath.row)
-//        cell.separatorInset = .zero
+//        cell.accessoryType = .disclosureIndicator // KEEP THIS FOR LATER
+        cell.resultLabel.preferredMaxLayoutWidth = tableView.bounds.width
+        if indexPath.row == 0 {
+            cell.resultLabel.text = ""
+        }
         return cell
     }
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -110,7 +116,7 @@ extension MatchHistoryView {
 //        return headerView
 //    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
+        return 100
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
@@ -122,6 +128,18 @@ extension MatchHistoryView {
         matchView.title = "EFC vs OAFC"
         navigationController?.pushViewController(matchView, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = FooterView()
+        footer.footerTitle.text = "No matches available"
+        footer.footerSubText.text = "Add matches by tapping the + button."
+        return footer
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return matches.isEmpty == true ? 150 : 0
+    }
+    
     //MARK: Custom methods for TableView
     func getBackgroundColour(rowNumber: Int) -> UIColor {
         if rowNumber % 2 == 0 {
@@ -139,5 +157,37 @@ extension MatchHistoryView {
         let storyboard = UIStoryboard(name: "CreateMatch", bundle: nil)
         let createMatchViewController = storyboard.instantiateViewController(withIdentifier: "CreateMatchVC")
         navigationController?.pushViewController(createMatchViewController, animated: true)
+    }
+}
+
+
+extension MatchHistoryView {
+    //MARK: CoreData and Fetch methods
+    private func fetchMatches(){
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<Match>(entityName: "Match")
+        do {
+            let list = try context.fetch(fetchRequest)
+            self.matches = list
+            self.tableView.reloadData()
+        } catch let fetchError {
+            print("Failed to fetch Player List with error: \(fetchError)")
+        }
+    }
+    
+    private func createMockData() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let newMatch = NSEntityDescription.insertNewObject(forEntityName: "Match", into: context) as! Match
+        newPlayer.name = self.surnameEntryField.text
+        newPlayer.number = 99
+        newPlayer.positionOnField = "Listed"
+        newPlayer.number = number
+        print("Player Created: \(String(describing: newPlayer.name)), number: \(number); position: \(String(describing: newPlayer.positionOnField))")
+                    
+        do {
+            try context.save()
+        } catch let saveErr {
+            print("Failed to create match with error: \(saveErr)")
+        }
     }
 }

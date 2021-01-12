@@ -11,7 +11,8 @@ import UIKit
 class QuarterCell: UICollectionViewCell {
     
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [cellTitle, scoreTeam, scoreOpponent, quarterLength])
+//        let stack = UIStackView(arrangedSubviews: [cellTitle, scoreTeam, scoreOpponent, quarterLength])
+        let stack = UIStackView(arrangedSubviews: [cellTitle])
         stack.axis = .vertical
         stack.alignment = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +22,7 @@ class QuarterCell: UICollectionViewCell {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Q1"
-        label.textColor = label.provideLabelColour()
+        label.textColor = UIColor.PaletteColour.Green.darkGreen
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 32)
         return label
@@ -58,7 +59,7 @@ class QuarterCell: UICollectionViewCell {
     //MARK: private methods
     
     private func setUpCell() {
-        backgroundColor = UIColor.PaletteColour.Green.monochromaticGreen
+        backgroundColor = UIColor.PaletteColour.Green.highlightGreen
         applyLightShadow()
         layer.cornerRadius = 10
 //        layer.masksToBounds = true
@@ -84,7 +85,7 @@ class QuarterCell: UICollectionViewCell {
     }
     
     func hideSelectedCell() {
-        backgroundColor = UIColor.PaletteColour.Green.monochromaticGreen
+        backgroundColor = UIColor.PaletteColour.Green.highlightGreen
         layer.borderWidth = 0
         applyLightShadow()
     }

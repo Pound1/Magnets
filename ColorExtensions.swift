@@ -26,13 +26,21 @@ extension UIColor {
             //Palette Oct 18 2020
             static let softGreen = UIColor(displayP3Red: 200/255, green: 242/255, blue: 207/255, alpha: 1)
             static let lightGreen = UIColor(displayP3Red: 0/255, green: 224/255, blue: 127/255, alpha: 1)
-            static let darkGreen = UIColor(displayP3Red: 7/255, green: 64/255, blue: 21/255, alpha: 1)
+//            static let darkGreen = UIColor(displayP3Red: 7/255, green: 64/255, blue: 21/255, alpha: 1)
             
-            static let newGreen = UIColor(displayP3Red: 94/255, green: 170/255, blue: 69/255, alpha: 1)
+            static let newGreen = UIColor(displayP3Red: 36/255, green: 144/255, blue: 58/255, alpha: 1)
+            static let highlightGreen = UIColor(displayP3Red: 60/255, green: 160/255, blue: 58/255, alpha: 1)
+            static let darkGreen = UIColor(displayP3Red: 36/255, green: 128/255, blue: 58/255, alpha: 1)
             static let monochromaticGreen = UIColor(displayP3Red: 84/255, green: 202/255, blue: 70/255, alpha: 1)
+            
+            /// sunset
+            // static let newGreen = UIColor(displayP3Red: 94/255, green: 170/255, blue: 69/255, alpha: 1)
+        }
+        struct Orange {
+            static let orangeHighlight = UIColor(displayP3Red: 255/255, green: 153/255, blue: 51/255, alpha: 1)
         }
         struct Red {
-            static let primaryRed = UIColor(displayP3Red: 237/255, green: 85/255, blue: 59/255, alpha: 1)
+            static let primaryRed = UIColor(displayP3Red: 204/255, green: 51/255, blue: 51/255, alpha: 1)
         }
         
         struct White {
@@ -48,6 +56,10 @@ extension UIColor {
             static let secondaryColor = UIColor(red: 0.38, green: 0.49, blue: 0.55, alpha: 1.0);
             static let secondaryLightColor = UIColor(red: 0.56, green: 0.67, blue: 0.73, alpha: 1.0);
             static let secondaryDarkColor = UIColor(red: 0.20, green: 0.32, blue: 0.37, alpha: 1.0);
+        }
+        struct Grey {
+            static let softGrey = UIColor(displayP3Red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+            static let midGrey = UIColor(displayP3Red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
         }
         
         struct SelectionTones {
