@@ -24,6 +24,8 @@
 		512CFA3122F99EBE00D5F633 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512CFA3022F99EBE00D5F633 /* UILabelExtensions.swift */; };
 		513CB33924D56650004075AD /* ManageTutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 513CB33824D56650004075AD /* ManageTutorialView.xib */; };
 		513CB33B24D57607004075AD /* ManageTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513CB33A24D57607004075AD /* ManageTutorialView.swift */; };
+		5141507625AE521400C4A651 /* GlobalEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5141507525AE521400C4A651 /* GlobalEnums.swift */; };
+		5141507E25AFAFE700C4A651 /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5141507D25AFAFE700C4A651 /* StatusLabel.swift */; };
 		5145D12F248145F000E505AE /* TeamStatisticCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5145D12E248145F000E505AE /* TeamStatisticCell.xib */; };
 		5145D1312486708E00E505AE /* TeamStatisticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5145D1302486708E00E505AE /* TeamStatisticCell.swift */; };
 		514A15E02394D727006741B4 /* CarouselTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514A15DF2394D727006741B4 /* CarouselTemplate.swift */; };
@@ -106,6 +108,8 @@
 		512CFA3022F99EBE00D5F633 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		513CB33824D56650004075AD /* ManageTutorialView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageTutorialView.xib; sourceTree = "<group>"; };
 		513CB33A24D57607004075AD /* ManageTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTutorialView.swift; sourceTree = "<group>"; };
+		5141507525AE521400C4A651 /* GlobalEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnums.swift; sourceTree = "<group>"; };
+		5141507D25AFAFE700C4A651 /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
 		5145D12E248145F000E505AE /* TeamStatisticCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamStatisticCell.xib; sourceTree = "<group>"; };
 		5145D1302486708E00E505AE /* TeamStatisticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStatisticCell.swift; sourceTree = "<group>"; };
 		514A15DF2394D727006741B4 /* CarouselTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTemplate.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				51B4D5A7251ADB5D0014ED33 /* HomeView.swift */,
 				51B4D5AC251AFAF80014ED33 /* HomeDisplayView.swift */,
 				51B4D5AF251AFF8D0014ED33 /* MatchHistoryCell.swift */,
+				5141507D25AFAFE700C4A651 /* StatusLabel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				51CF593222E038A400A02F61 /* ColorExtensions.swift */,
 				51ED53B5242E10A7006A3762 /* DateExtensions.swift */,
 				51B4D5B6251B104D0014ED33 /* ViewExtensions.swift */,
+				5141507525AE521400C4A651 /* GlobalEnums.swift */,
 				515F6D7D251ED36700BAF3E2 /* SegmentedControlExtensions.swift */,
 				512CFA3022F99EBE00D5F633 /* UILabelExtensions.swift */,
 				51603AA622FB906800F34DB0 /* MockData.json */,
@@ -531,6 +537,7 @@
 				51045E17251C1A0A002B458D /* RowCell.swift in Sources */,
 				51D2B41622F8472200FE6C41 /* PositionOnFieldCell.swift in Sources */,
 				51B4D5B0251AFF8D0014ED33 /* MatchHistoryCell.swift in Sources */,
+				5141507625AE521400C4A651 /* GlobalEnums.swift in Sources */,
 				51086DFD25A3E89A00BE6782 /* StatisticTableViewCell.swift in Sources */,
 				51CF591F22E02EE100A02F61 /* AppDelegate.swift in Sources */,
 				51FF3D1925904AA10096AEC6 /* ControlBookViewController.swift in Sources */,
@@ -550,6 +557,7 @@
 				51FF3D15258209400096AEC6 /* MatchDetailInformationView.swift in Sources */,
 				51CF593322E038A400A02F61 /* ColorExtensions.swift in Sources */,
 				51086DFA25A3CD1100BE6782 /* StatisticHeaderViewCell.swift in Sources */,
+				5141507E25AFAFE700C4A651 /* StatusLabel.swift in Sources */,
 				51B6471B232A6C9A00661AB9 /* StatisticSheetController.swift in Sources */,
 				51B4D5B7251B104D0014ED33 /* ViewExtensions.swift in Sources */,
 				51BD4DEB237D6DF40057905D /* ManagePlayerDetailView.swift in Sources */,

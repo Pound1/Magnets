@@ -27,6 +27,7 @@
     </entity>
     <entity name="Score" representedClassName="Score" syncable="YES" codeGenerationType="class">
         <attribute name="goalTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ground" optional="YES" attributeType="String"/>
         <attribute name="pointTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamName" optional="YES" attributeType="String"/>
     </entity>
@@ -53,12 +54,12 @@
     </entity>
     <elements>
         <element name="IndividualRecord" positionX="117" positionY="36" width="128" height="88"/>
+        <element name="Match" positionX="108" positionY="36" width="128" height="119"/>
         <element name="Player" positionX="-33.265625" positionY="102.4296875" width="128" height="88"/>
         <element name="Record" positionX="-71.98046875" positionY="-59.6953125" width="128" height="118"/>
+        <element name="Score" positionX="117" positionY="45" width="128" height="89"/>
         <element name="StatSheet" positionX="293.28125" positionY="72.30859375" width="128" height="148"/>
         <element name="TeamRecord" positionX="99.421875" positionY="-122.11328125" width="128" height="103"/>
         <element name="TeamStatistic" positionX="108" positionY="36" width="128" height="103"/>
-        <element name="Match" positionX="108" positionY="36" width="128" height="119"/>
-        <element name="Score" positionX="117" positionY="45" width="128" height="74"/>
     </elements>
 </model>

@@ -10,17 +10,34 @@ import UIKit
 
 class MatchHistoryCell: UITableViewCell {
     
-    let statusLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Status"
-        label.backgroundColor = UIColor.PaletteColour.Grey.midGrey
-        label.layer.cornerRadius = 4
-        label.layer.borderColor = UIColor.PaletteColour.Orange.orangeHighlight.cgColor
-        label.layer.borderWidth = 2
-        label.layer.masksToBounds = true
-        label.font = UIFont.systemFont(ofSize: 8)
-        label.textAlignment = .center
+    var match = Match() {
+        didSet {
+            statusLabel.text = match.status
+            statusLabel.applyColourScheme()
+            titleLabel.text = "\(match.homeTeam ?? "Home ") v \(match.awayTeam ?? "Away")"
+            locationLabel.text = match.location
+            
+            
+            resultLabel.text = match.result
+            if statusLabel.text != matchStatus.complete.rawValue {
+                resultLabel.removeFromSuperview()
+                homeResult.label.text = ""
+                homeResult.value.text = ""
+                awayResult.label.text = ""
+                awayResult.value.text = ""
+            }
+            // display date
+            if let date = match.date {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM, dd, yyyy"
+                let dateString = dateFormatter.string(from: date)
+                dateLabel.text = dateString
+            }
+        }
+    }
+    
+    let statusLabel: StatusLabel = {
+        let label = StatusLabel()
         return label
     }()
     let titleLabel: UILabel = {
@@ -37,7 +54,7 @@ class MatchHistoryCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "at ground location"
 //        label.backgroundColor = .brown
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .lightGray
         return label
     }()
@@ -46,7 +63,7 @@ class MatchHistoryCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "7/8/20"
 //        label.backgroundColor = .blue
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .lightGray
         return label
     }()
@@ -58,7 +75,10 @@ class MatchHistoryCell: UITableViewCell {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 10)
         label.textAlignment = .center
-        label.layer.cornerRadius = 4
+        label.layer.cornerRadius = 2
+        label.layer.masksToBounds = true
+        label.layer.borderColor = UIColor.PaletteColour.Green.darkGreen.cgColor
+        label.layer.borderWidth = 2
         label.layer.masksToBounds = true
         return label
     }()
@@ -82,13 +102,25 @@ class MatchHistoryCell: UITableViewCell {
         return detail
     }()
     
-    lazy var labelStack: UIStackView = {
+    lazy var scoreStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [homeResult, awayResult])
         stack.translatesAutoresizingMaskIntoConstraints = false
-//        stack.backgroundColor = .cyan
         stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .fillProportionally
+        return stack
+    }()
+    
+    lazy var infoStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [titleLabel, locationLabel, dateLabel])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+//        stack.backgroundColor = .cyan
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.distribution = .fill
+        stack.setCustomSpacing(0, after: titleLabel)
+        stack.setCustomSpacing(0, after: locationLabel)
+        stack.setCustomSpacing(2, after: dateLabel)
         return stack
     }()
     
@@ -101,11 +133,8 @@ class MatchHistoryCell: UITableViewCell {
         backgroundColor = provideBackgroundColour()
         
         addSubview(statusLabel)
-        addSubview(titleLabel)
-        addSubview(locationLabel)
-        addSubview(dateLabel)
-        addSubview(resultLabel)
-        addSubview(labelStack)
+        addSubview(infoStack)
+        addSubview(scoreStack)
         
         let thirdScreenWidth = frame.width/3
         NSLayoutConstraint.activate([
@@ -115,41 +144,26 @@ class MatchHistoryCell: UITableViewCell {
             statusLabel.heightAnchor.constraint(equalToConstant: 20),
             statusLabel.widthAnchor.constraint(equalToConstant: 60),
             
-            titleLabel.leadingAnchor.constraint(equalTo: statusLabel.trailingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: labelStack.leadingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-//            titleLabel.bottomAnchor.constraint(equalTo: locationLabel.topAnchor),
-
-            locationLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            locationLabel.trailingAnchor.constraint(equalTo: labelStack.leadingAnchor),
-//            locationLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            locationLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-
-            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: labelStack.leadingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor),
-
-            resultLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            resultLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 2),
-            resultLabel.widthAnchor.constraint(equalToConstant: 60),
-            resultLabel.heightAnchor.constraint(equalToConstant: 20),
-            
-            labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
-            labelStack.widthAnchor.constraint(equalToConstant: thirdScreenWidth),
-            labelStack.heightAnchor.constraint(equalToConstant: 100),
-//            labelStack.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            labelStack.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -quarterScreenWidth),
+            infoStack.leadingAnchor.constraint(equalTo: statusLabel.trailingAnchor, constant: 16),
+            infoStack.trailingAnchor.constraint(equalTo: scoreStack.leadingAnchor),
+            infoStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            infoStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+                        
+            scoreStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
+            scoreStack.widthAnchor.constraint(equalToConstant: thirdScreenWidth),
+            scoreStack.heightAnchor.constraint(equalToConstant: 100),
+            scoreStack.centerYAnchor.constraint(equalTo: centerYAnchor),
             
         ])
-//        showResultLabel()
+        showResultLabel()
     }
     
     private func showResultLabel() {
         if resultLabel.text != nil {
-            addSubview(resultLabel)
+            infoStack.addArrangedSubview(resultLabel)
             NSLayoutConstraint.activate([
-                resultLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-                resultLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4)
+                resultLabel.widthAnchor.constraint(equalToConstant: 66),
+                resultLabel.heightAnchor.constraint(equalToConstant: 20),
             ])
         }
     }

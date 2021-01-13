@@ -54,8 +54,10 @@ class MatchHistoryView: UITableViewController {
     //MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         segmentedControl.backgroundColor = UIColor.PaletteColour.Green.primaryDarkColor
         segmentedControl.tintColor = .black
+//        createMockData()
         fetchMatches()
         navigationItem.title = "Matches"
         if #available(iOS 13.0, *) {
@@ -66,8 +68,9 @@ class MatchHistoryView: UITableViewController {
             navigationController?.navigationBar.shadowImage = UIImage()
         }
         self.tableView.separatorStyle = .singleLine
-        self.tableView.estimatedRowHeight = 80
+        self.tableView.estimatedRowHeight = 60 // these seem to do nothing
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         tableView.register(MatchHistoryCell.self, forCellReuseIdentifier: cellID)
         setUpTableViewElements()
@@ -104,20 +107,23 @@ extension MatchHistoryView {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! MatchHistoryCell
-//        cell.accessoryType = .disclosureIndicator // KEEP THIS FOR LATER
-        cell.resultLabel.preferredMaxLayoutWidth = tableView.bounds.width
-        if indexPath.row == 0 {
-            cell.resultLabel.text = ""
+        cell.match = matches[indexPath.row]
+        if matches[indexPath.row].status != matchStatus.complete.rawValue {
+            cell.accessoryType = .disclosureIndicator
         }
+//        cell.resultLabel.preferredMaxLayoutWidth = tableView.bounds.width
+//        if indexPath.row == 0 {
+//            cell.resultLabel.text = ""
+//        }
         return cell
     }
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        let headerView = FilterHeaderCell()
 //        return headerView
 //    }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 80
+//    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
@@ -138,6 +144,24 @@ extension MatchHistoryView {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return matches.isEmpty == true ? 150 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let match = matches[indexPath.row]
+        matches.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.delete(match)
+        do {
+            try context.save()
+        } catch let err {
+            print("Failed to delete with error: \(err)")
+        }
     }
     
     //MARK: Custom methods for TableView
@@ -168,7 +192,8 @@ extension MatchHistoryView {
         let fetchRequest = NSFetchRequest<Match>(entityName: "Match")
         do {
             let list = try context.fetch(fetchRequest)
-            self.matches = list
+            let sortedList = list.sorted(by: {$0.date! > $1.date!})
+            self.matches = sortedList
             self.tableView.reloadData()
         } catch let fetchError {
             print("Failed to fetch Player List with error: \(fetchError)")
@@ -178,11 +203,13 @@ extension MatchHistoryView {
     private func createMockData() {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let newMatch = NSEntityDescription.insertNewObject(forEntityName: "Match", into: context) as! Match
-        newPlayer.name = self.surnameEntryField.text
-        newPlayer.number = 99
-        newPlayer.positionOnField = "Listed"
-        newPlayer.number = number
-        print("Player Created: \(String(describing: newPlayer.name)), number: \(number); position: \(String(describing: newPlayer.positionOnField))")
+        newMatch.status = matchStatus.notStarted.rawValue
+        newMatch.homeTeam = "GEFC"
+        newMatch.awayTeam = "AFC"
+        newMatch.location = "Packer Park"
+        newMatch.date = Date()
+        newMatch.result = "GEFC WON"
+        print("Match Created: \(String(describing: newMatch.homeTeam)) v \(String(describing: newMatch.awayTeam))")
                     
         do {
             try context.save()
