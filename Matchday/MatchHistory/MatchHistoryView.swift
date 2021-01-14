@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol MatchHistoryViewDelegate {
+    func didAddNewMatch(match: Match)
+}
+
 class MatchHistoryView: UITableViewController {
     
     //MARK: Properties
@@ -60,6 +64,7 @@ class MatchHistoryView: UITableViewController {
 //        createMockData()
         fetchMatches()
         navigationItem.title = "Matches"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CreateNewMatch))
         if #available(iOS 13.0, *) {
             navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .clear
         } else {
@@ -71,31 +76,31 @@ class MatchHistoryView: UITableViewController {
         self.tableView.estimatedRowHeight = 60 // these seem to do nothing
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+//        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0) // was for custom filter
         tableView.register(MatchHistoryCell.self, forCellReuseIdentifier: cellID)
         setUpTableViewElements()
     }
     
     func setUpTableViewElements() {
-        view.addSubview(segmentedControl)
-        view.addSubview(separator)
-        view.addSubview(newGameButton)
+//        view.addSubview(segmentedControl)
+//        view.addSubview(separator)
+//        view.addSubview(newGameButton)
         NSLayoutConstraint.activate([
 
-            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -8),
-            segmentedControl.bottomAnchor.constraint(equalTo: tableView.topAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 44),
-            
-            separator.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            separator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -2),
-            separator.heightAnchor.constraint(equalToConstant: 2),
-            
-            newGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            newGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            newGameButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            newGameButton.heightAnchor.constraint(equalToConstant: 44),
+//            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -8),
+//            segmentedControl.bottomAnchor.constraint(equalTo: tableView.topAnchor),
+//            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
+//            segmentedControl.heightAnchor.constraint(equalToConstant: 44),
+//
+//            separator.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            separator.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            separator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -2),
+//            separator.heightAnchor.constraint(equalToConstant: 2),
+//
+//            newGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            newGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+//            newGameButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+//            newGameButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 }
@@ -111,24 +116,16 @@ extension MatchHistoryView {
         if matches[indexPath.row].status != matchStatus.complete.rawValue {
             cell.accessoryType = .disclosureIndicator
         }
-//        cell.resultLabel.preferredMaxLayoutWidth = tableView.bounds.width
-//        if indexPath.row == 0 {
-//            cell.resultLabel.text = ""
-//        }
         return cell
     }
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        let headerView = FilterHeaderCell()
 //        return headerView
 //    }
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 80
-//    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("taped agraldkj \(indexPath.row)")
         // create a page and display it on the nav stack
         let matchView = MatchDetailView()
         matchView.title = "EFC vs OAFC"
@@ -174,12 +171,17 @@ extension MatchHistoryView {
     }
 }
 
-extension MatchHistoryView {
+extension MatchHistoryView: MatchHistoryViewDelegate {
+    func didAddNewMatch(match: Match) {
+        print("Adding new match inside History view.")
+    }
+    
     //MARK: ObjC methods
     @objc func CreateNewMatch() {
         print("Creating new match")
         let storyboard = UIStoryboard(name: "CreateMatch", bundle: nil)
-        let createMatchViewController = storyboard.instantiateViewController(withIdentifier: "CreateMatchVC")
+        guard let createMatchViewController = storyboard.instantiateViewController(withIdentifier: "CreateMatchVC") as? CreateMatchController else {return}
+        createMatchViewController.delegate = self
         navigationController?.pushViewController(createMatchViewController, animated: true)
     }
 }
