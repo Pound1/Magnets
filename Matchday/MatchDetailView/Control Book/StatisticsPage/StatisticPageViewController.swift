@@ -11,8 +11,15 @@ import CoreData
 
 class StatisticPageViewController: UIViewController {
     
-    var statisticArray = [TeamStatistic]()
-    let statistic = [["Statistic Name", "Statistic 1"], ["Home Name", "AFC"], ["Home value", "4"], ["Away Name", "NFC"], ["Away value", "6"]]
+    let footerID = "footerID"
+    var statisticArray = [TeamStatistic]() {
+        didSet{
+            print("Setting Stat array")
+            statisticArray.sort { ($0.statisticName! as String) < ($1.statisticName! as String)}
+            tableView.reloadData()
+        }
+    }
+//    let statistic = [["Statistic Name", "Statistic 1"], ["Home Name", "AFC"], ["Home value", "4"], ["Away Name", "NFC"], ["Away value", "6"]]
     let statsImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,12 +55,11 @@ class StatisticPageViewController: UIViewController {
     
     private func setUpView() {
         view.backgroundColor = view.provideBackgroundColour()
-        fetchStatSheets()
+//        fetchStatSheets()
         view.addSubview(statsImage)
         view.addSubview(controllerPageTitle)
         view.addSubview(tableView)
-        
-//        view.addSubview(controllerPageTitle)
+//        tableView.register(FooterView.self, forCellReuseIdentifier: footerID)
     }
     
     //MARK:- fetch service
@@ -88,7 +94,7 @@ class StatisticPageViewController: UIViewController {
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: statsImage.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: statsImage.bottomAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
         ])
     }
@@ -96,7 +102,6 @@ class StatisticPageViewController: UIViewController {
 
 extension StatisticPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Count of Stats: ", statistic.count)
         return statisticArray.count
     }
     
@@ -113,6 +118,15 @@ extension StatisticPageViewController: UITableViewDelegate {
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return statisticArray.isEmpty == true ? 0 : 40
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = StatisticsFooterView()
+        footer.title.text = "No Statistics Recorded"
+        footer.subText.text = "No statistics were found for this quarter."
+        return footer
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return statisticArray.isEmpty == true ? 150 : 0
     }
 }

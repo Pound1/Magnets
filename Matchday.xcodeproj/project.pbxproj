@@ -37,6 +37,7 @@
 		51653118233783CD000A2D87 /* StatisticRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51653116233783CD000A2D87 /* StatisticRecord+CoreDataClass.swift */; };
 		51653119233783CD000A2D87 /* StatisticRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51653117233783CD000A2D87 /* StatisticRecord+CoreDataProperties.swift */; };
 		517BC4F82355DBED0018E8A9 /* MatchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC4F72355DBED0018E8A9 /* MatchFooterView.swift */; };
+		5195553C25BE737C00AB259F /* RotationsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5195553B25BE737C00AB259F /* RotationsViewCell.swift */; };
 		5198B6C5251DA72300D5905D /* QuarterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5198B6C4251DA72300D5905D /* QuarterCell.swift */; };
 		5198B6C9251DAECB00D5905D /* MatchTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5198B6C8251DAECB00D5905D /* MatchTableViewHeaderCell.swift */; };
 		519D0FFB2363A85000D0D28C /* ManageMatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519D0FFA2363A85000D0D28C /* ManageMatchController.swift */; };
@@ -122,6 +123,7 @@
 		51653116233783CD000A2D87 /* StatisticRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatisticRecord+CoreDataClass.swift"; sourceTree = "<group>"; };
 		51653117233783CD000A2D87 /* StatisticRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatisticRecord+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		517BC4F72355DBED0018E8A9 /* MatchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchFooterView.swift; path = ../MatchFooterView.swift; sourceTree = "<group>"; };
+		5195553B25BE737C00AB259F /* RotationsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationsViewCell.swift; sourceTree = "<group>"; };
 		5198B6C4251DA72300D5905D /* QuarterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterCell.swift; sourceTree = "<group>"; };
 		5198B6C8251DAECB00D5905D /* MatchTableViewHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewHeaderCell.swift; sourceTree = "<group>"; };
 		519D0FFA2363A85000D0D28C /* ManageMatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMatchController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,25 @@
 				51C896B5253DAACF005502FA /* EditSettingController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		5195553E25BE73A400AB259F /* RotationsPage */ = {
+			isa = PBXGroup;
+			children = (
+				51DACC882591796600F2BE85 /* RotationsPageVC.swift */,
+				5195553B25BE737C00AB259F /* RotationsViewCell.swift */,
+			);
+			path = RotationsPage;
+			sourceTree = "<group>";
+		};
+		5195553F25BE73B200AB259F /* StatisticsPage */ = {
+			isa = PBXGroup;
+			children = (
+				51DACC852591758D00F2BE85 /* StatisticPageViewController.swift */,
+				51086DF925A3CD1100BE6782 /* StatisticHeaderViewCell.swift */,
+				51086DFC25A3E89A00BE6782 /* StatisticTableViewCell.swift */,
+			);
+			path = StatisticsPage;
 			sourceTree = "<group>";
 		};
 		519D0FFC236993A400D0D28C /* Manage Match */ = {
@@ -407,10 +428,8 @@
 			children = (
 				51FF3D1825904AA10096AEC6 /* ControlBookViewController.swift */,
 				51DACC8B25917A1800F2BE85 /* TimerPageVC.swift */,
-				51DACC882591796600F2BE85 /* RotationsPageVC.swift */,
-				51DACC852591758D00F2BE85 /* StatisticPageViewController.swift */,
-				51086DF925A3CD1100BE6782 /* StatisticHeaderViewCell.swift */,
-				51086DFC25A3E89A00BE6782 /* StatisticTableViewCell.swift */,
+				5195553E25BE73A400AB259F /* RotationsPage */,
+				5195553F25BE73B200AB259F /* StatisticsPage */,
 				51AAA9AD25A33F4400574DDE /* ControlBookHeaderView.swift */,
 			);
 			path = "Control Book";
@@ -556,6 +575,7 @@
 				51C896B6253DAACF005502FA /* EditSettingController.swift in Sources */,
 				51FF3D15258209400096AEC6 /* MatchDetailInformationView.swift in Sources */,
 				51CF593322E038A400A02F61 /* ColorExtensions.swift in Sources */,
+				5195553C25BE737C00AB259F /* RotationsViewCell.swift in Sources */,
 				51086DFA25A3CD1100BE6782 /* StatisticHeaderViewCell.swift in Sources */,
 				5141507E25AFAFE700C4A651 /* StatusLabel.swift in Sources */,
 				51B6471B232A6C9A00661AB9 /* StatisticSheetController.swift in Sources */,

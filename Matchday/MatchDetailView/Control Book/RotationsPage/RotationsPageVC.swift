@@ -10,8 +10,10 @@ import UIKit
 
 class RotationsPageVC: UIViewController {
     
+    let footerID = "footerID"
+    var rotationsList = [RotationData]()
     let cellID = "cellID"
-    let clockImage: UIImageView = {
+    let rotationImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(imageLiteralResourceName: "rotation_icon").withRenderingMode(.alwaysTemplate)
@@ -43,11 +45,13 @@ class RotationsPageVC: UIViewController {
         super.viewDidLoad()
         setUpView()
         addConstraints()
+//        collectionView.register(AddToFieldCell.self, forCellWithReuseIdentifier: footerID)
+        collectionView.register(ControlBookFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
     }
     
     private func setUpView() {
         view.backgroundColor = view.provideBackgroundColour()
-        view.addSubview(clockImage)
+        view.addSubview(rotationImage)
         view.addSubview(controllerPageTitle)
         view.addSubview(collectionView)
         collectionView.dataSource = self
@@ -58,19 +62,19 @@ class RotationsPageVC: UIViewController {
     private func addConstraints() {
         NSLayoutConstraint.activate([
 //            clockImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            clockImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            clockImage.widthAnchor.constraint(equalToConstant: 30),
-            clockImage.heightAnchor.constraint(equalToConstant: 30),
-            clockImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            rotationImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            rotationImage.widthAnchor.constraint(equalToConstant: 30),
+            rotationImage.heightAnchor.constraint(equalToConstant: 30),
+            rotationImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             
-            controllerPageTitle.leadingAnchor.constraint(equalTo: clockImage.trailingAnchor, constant: 20),
+            controllerPageTitle.leadingAnchor.constraint(equalTo: rotationImage.trailingAnchor, constant: 20),
             controllerPageTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            controllerPageTitle.centerYAnchor.constraint(equalTo: clockImage.centerYAnchor),
+            controllerPageTitle.centerYAnchor.constraint(equalTo: rotationImage.centerYAnchor),
             controllerPageTitle.heightAnchor.constraint(equalToConstant: 50),
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: clockImage.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: rotationImage.bottomAnchor, constant: 20),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
         ])
     }
@@ -78,12 +82,20 @@ class RotationsPageVC: UIViewController {
 
 extension RotationsPageVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return rotationsList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! RotationsViewCell
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerID, for: indexPath) as! ControlBookFooterView
+        return footer
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return rotationsList.isEmpty == true ? CGSize(width: view.frame.width, height: 150) : CGSize(width: 0, height: 0)
     }
 }
 
@@ -97,68 +109,50 @@ extension RotationsPageVC: UICollectionViewDelegate {
     
 }
 
-class RotationsViewCell: UICollectionViewCell {
+
+
+class ControlBookFooterView: UICollectionViewCell {
     
-    let separator: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(displayP3Red: 200/255, green: 199/255, blue: 204/255, alpha: 0.5)
-        return view
-    }()
-    let timeLabel: UILabel = {
+    let title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "12:45"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .ultraLight)
+        label.text = "No Rotations were recorded for this quarter."
+        label.text = "Under Construction"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .center
+        label.numberOfLines = 2
+        label.textColor = .gray
         return label
     }()
-    let firstRotationInformation: UILabel = {
+    let subText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "(Player A) went from <the bench> to [forward flank]"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = "Rotations are coming soon. If you would like to see this feature sooner, please tap the YES button."
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.numberOfLines = 3
+        label.textColor = .gray
         return label
     }()
-    let secondRotationInformation: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "(Player B) went from <forward flank> to [the bench]"
-        label.font = UIFont.systemFont(ofSize: 12)
-        return label
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpCell()
+        setUpFooter()
     }
-    private func setUpCell() {
-        addSubview(timeLabel)
-        addSubview(firstRotationInformation)
-        addSubview(secondRotationInformation)
-        addSubview(separator)
-        layoutCellView()
-    }
-    private func layoutCellView() {
-        let sectionOfWidth = frame.width/8
+    private func setUpFooter() {
+        addSubview(title)
+        addSubview(subText)
         NSLayoutConstraint.activate([
-            timeLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            timeLabel.topAnchor.constraint(equalTo: topAnchor),
-            timeLabel.widthAnchor.constraint(equalToConstant: sectionOfWidth),
-            timeLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            title.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            title.centerYAnchor.constraint(equalTo: centerYAnchor),
+            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+//            title.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            title.bottomAnchor.constraint(equalTo: centerYAnchor),
             
-            firstRotationInformation.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor),
-            firstRotationInformation.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            firstRotationInformation.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            
-            secondRotationInformation.leadingAnchor.constraint(equalTo: firstRotationInformation.leadingAnchor),
-            secondRotationInformation.topAnchor.constraint(equalTo: firstRotationInformation.bottomAnchor, constant: 2),
-            secondRotationInformation.trailingAnchor.constraint(equalTo: firstRotationInformation.trailingAnchor),
-            
-            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            separator.trailingAnchor.constraint(equalTo: trailingAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1),
-            separator.topAnchor.constraint(equalTo: bottomAnchor),
+            subText.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            subText.trailingAnchor.constraint(equalTo: title.trailingAnchor),
+            subText.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 2),
+            subText.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

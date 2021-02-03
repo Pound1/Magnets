@@ -71,3 +71,58 @@ class StatisticHeaderViewCell: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class StatisticsFooterView: UIView {
+    
+    let title: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "No Rotations were recorded for this quarter."
+        label.text = "Under Construction"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.textColor = .gray
+        return label
+    }()
+    let subText: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Rotations are coming soon. If you would like to see this feature sooner, please tap the YES button."
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.numberOfLines = 3
+        label.textColor = .gray
+        return label
+    }()
+    
+    public override init(frame: CGRect){
+        super.init(frame:frame)
+        backgroundColor = UIColor(white: 1, alpha: 0)
+        addSubview(title)
+        addSubview(subText)
+        setUpFooter()
+    }
+    
+    private func setUpFooter() {
+        addSubview(title)
+        addSubview(subText)
+        NSLayoutConstraint.activate([
+//            title.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            title.centerYAnchor.constraint(equalTo: centerYAnchor),
+            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+//            title.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            title.bottomAnchor.constraint(equalTo: centerYAnchor),
+
+            subText.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            subText.trailingAnchor.constraint(equalTo: title.trailingAnchor),
+            subText.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 2),
+            subText.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

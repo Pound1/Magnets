@@ -16,6 +16,49 @@ class MatchDetailView: UIViewController  {
     let headerCell = "headerCell"
     let listCell = "listCell"
     let tableViewHeader = "tableViewHeader"
+    var matchHistory: MatchHistory? {
+        didSet {
+//            controlBook.quarters = matchHistory?.quarter
+            guard let match = matchHistory else {return}
+            //Set Date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM"
+            let dateString = dateFormatter.string(from: match.startTime ?? Date())
+            informationView.detail1.value.text = dateString
+            
+            //Set Total Time
+            if matchHistory?.finishTime == nil {
+                informationView.detail2.value.text = " - "
+            } else {
+                guard let startTime = matchHistory?.startTime else {return}
+                let totalMatchTime = matchHistory?.finishTime?.timeIntervalSince(startTime)
+                print("Time: \(String(describing: totalMatchTime))")
+//                informationView.detail2.value.text = String(format: totalMatchTime, totalMatchTime ?? " - ")
+            }
+            
+            //Set Scores
+            guard let scores = match.totalScore?.allObjects as? [Score] else {return}
+            for score in scores {
+                let scoreLine = combineScore(goals: Int(score.goalTally), points: Int(score.pointTally))
+                print(scoreLine)
+                switch score.teamType {
+                case "home":
+                    informationView.detail3.value.text = scoreLine
+                    informationView.detail3.label.text = score.teamName
+                case "away":
+                    informationView.detail4.value.text = scoreLine
+                    informationView.detail4.label.text = score.teamName
+                case "mutual":
+                    informationView.detail3.value.text = combineScore(goals: Int(scores[0].goalTally), points: Int(scores[0].pointTally))
+                    informationView.detail3.label.text = scores[0].teamName
+                    informationView.detail4.value.text = combineScore(goals: Int(scores[1].goalTally), points: Int(scores[1].pointTally))
+                    informationView.detail4.label.text = scores[1].teamName
+                default:
+                    informationView.detail3.value.text = "missing"
+                }
+            }
+        }
+    }
     
     let whiteBackdropForCustomTabBar: UIView = {
         let view = UIView()
@@ -32,6 +75,7 @@ class MatchDetailView: UIViewController  {
         return view
     }()
     let selectedCell = 0
+    
     let informationView: MatchDetailInformationView = {
         let view = MatchDetailInformationView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -135,6 +179,16 @@ class MatchDetailView: UIViewController  {
             whiteBackdropForCustomTabBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             ])
     }
+    
+    func combineScore(goals: Int, points: Int) -> String {
+        var combinedScore = ""
+        let totalGoalScore = 6 * goals
+        let totalScore = String(totalGoalScore + points)
+        let goalString = String(goals)
+        let pointString = String(points)
+        combinedScore = "\(goalString).\(pointString) (\(totalScore))"
+        return combinedScore
+    }
 }
 //MARK: Tableview Methods
 extension MatchDetailView: UITableViewDelegate {
@@ -184,6 +238,10 @@ extension MatchDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? QuarterCell {
             cell.showSelectedCell()
+            guard var quarters = (matchHistory?.quarters?.allObjects as? [Quarter]) else {return}
+            quarters.sort { $0.number < $1.number}
+            controlBook.quarter = quarters[indexPath.row]
+            print("Sending control book: quarter \(indexPath.row)")
         }
         if indexPath.row != 0 { // this removes the highlight on the auto-selected cell when the view loads.
             let index = IndexPath(row: 0, section: 0)
@@ -197,6 +255,11 @@ extension MatchDetailView: UICollectionViewDataSource {
             cell.hideSelectedCell()
         }
     }
+//    func fetchSelectedQuarter(tappedCell: Int, quarters: []) -> Quarter {
+//
+//        let quarters = matchHistory.quarters.allObjects as! [Quarter]
+//        return quarters?[tappedCell]
+//    }
 }
 
 extension MatchDetailView: UICollectionViewDelegateFlowLayout {

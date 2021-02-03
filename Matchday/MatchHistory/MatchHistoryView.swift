@@ -128,7 +128,8 @@ extension MatchHistoryView {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // create a page and display it on the nav stack
         let matchView = MatchDetailView()
-        matchView.title = "EFC vs OAFC"
+        matchView.title = "\(matches[indexPath.row].homeTeam ?? "Home") vs \(matches[indexPath.row].awayTeam ?? "Away")"
+        matchView.matchHistory = matches[indexPath.row].history
         navigationController?.pushViewController(matchView, animated: true)
     }
     
@@ -174,6 +175,11 @@ extension MatchHistoryView {
 extension MatchHistoryView: MatchHistoryViewDelegate {
     func didAddNewMatch(match: Match) {
         print("Adding new match inside History view.")
+        matches.append(match)
+        
+        // insert new index path
+        let newIndexPath = IndexPath(row: matches.count-1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
     
     //MARK: ObjC methods
@@ -196,9 +202,12 @@ extension MatchHistoryView {
             let list = try context.fetch(fetchRequest)
             let sortedList = list.sorted(by: {$0.date! > $1.date!})
             self.matches = sortedList
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+//            self.tableView.reloadData()
         } catch let fetchError {
-            print("Failed to fetch Player List with error: \(fetchError)")
+            print("Failed to fetch Match list with error: \(fetchError)")
         }
     }
     

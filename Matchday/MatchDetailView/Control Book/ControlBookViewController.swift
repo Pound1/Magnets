@@ -10,6 +10,16 @@ import UIKit
 
 class ControlBookViewController: UIPageViewController {
     
+    var quarter: Quarter? {
+        didSet {
+//            print("Recieving quarter in control book")
+            timerPage.quarter = quarter
+            
+            guard let statistics = quarter?.statistics?.allObjects as? [TeamStatistic] else {return}
+            statisticsPage.statisticArray = statistics
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -22,9 +32,11 @@ class ControlBookViewController: UIPageViewController {
         control.currentPageIndicatorTintColor = .black
         return control
     }()
-    let viewC = StatisticPageViewController()
-    let viewC2 = RotationsPageVC()
-    let viewC3 = TimerPageVC()
+    var rotationsArray = [RotationData]()
+    let statisticsPage = StatisticPageViewController()
+    let rotationsPage = RotationsPageVC()
+    let timerPage = TimerPageVC()
+    lazy var pageArray = [timerPage, statisticsPage, rotationsPage]
 
     //MARK: Private Methods
     private func setUpView() {
@@ -39,6 +51,7 @@ class ControlBookViewController: UIPageViewController {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         addConstraints()
+        setUpPages()
     }
     private func addConstraints() {
         view.addSubview(pageControl)
@@ -48,11 +61,10 @@ class ControlBookViewController: UIPageViewController {
             pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 50),
-//            pageControl.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [viewC2, viewC3, viewC]
+        return pageArray
     }()
     private func newColoredViewController(color: String) -> UIViewController {
         let view = UIViewController()
@@ -60,8 +72,10 @@ class ControlBookViewController: UIPageViewController {
         return view
     }
     private func updatePageControl(index: Int) {
-        print("Navigating to page: ", index)
         pageControl.currentPage = index
+    }
+    func setUpPages() {
+        rotationsPage.rotationsList = rotationsArray
     }
 }
 

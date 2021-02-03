@@ -143,7 +143,7 @@ class MatchDetailInformationView: UIView {
 
 class MatchValues: UIView {
     
-    let value: UILabel = {
+    var value: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Value 3"

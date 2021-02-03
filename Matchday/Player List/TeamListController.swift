@@ -76,8 +76,7 @@ class TeamListController: UITableViewController, TeamListControllerDelegate {
     func setUpNavElements(){
         navigationItem.title = "Players"
         if #available(iOS 13.0, *) {
-            view.backgroundColor = .secondarySystemBackground // this is a medium gray (which also looks like the cell backgrounds in Settings menu)
-//            view.backgroundColor = .systemBackground // this is a black (like background Settings menu)
+            view.backgroundColor = .secondarySystemBackground
         } else {
             view.backgroundColor = UIColor.PaletteColour.BlueGray.secondaryDarkColor
         }

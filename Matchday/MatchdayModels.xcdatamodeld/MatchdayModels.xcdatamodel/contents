@@ -12,11 +12,27 @@
         <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="result" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchHistory" inverseName="match" inverseEntity="MatchHistory"/>
+    </entity>
+    <entity name="MatchHistory" representedClassName="MatchHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="finishTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="match" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Match" inverseName="history" inverseEntity="Match"/>
+        <relationship name="quarters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quarter" inverseName="matchHistory" inverseEntity="Quarter"/>
+        <relationship name="totalScore" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Score" inverseName="match" inverseEntity="Score"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="positionOnField" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Quarter" representedClassName="Quarter" syncable="YES" codeGenerationType="class">
+        <attribute name="finishTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="matchHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchHistory" inverseName="quarters" inverseEntity="MatchHistory"/>
+        <relationship name="score" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Score" inverseName="quarter" inverseEntity="Score"/>
+        <relationship name="statistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="quarter" inverseEntity="TeamStatistic"/>
     </entity>
     <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -27,9 +43,11 @@
     </entity>
     <entity name="Score" representedClassName="Score" syncable="YES" codeGenerationType="class">
         <attribute name="goalTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="ground" optional="YES" attributeType="String"/>
         <attribute name="pointTally" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamName" optional="YES" attributeType="String"/>
+        <attribute name="teamType" optional="YES" attributeType="String"/>
+        <relationship name="match" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchHistory" inverseName="totalScore" inverseEntity="MatchHistory"/>
+        <relationship name="quarter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quarter" inverseName="score" inverseEntity="Quarter"/>
     </entity>
     <entity name="StatSheet" representedClassName="StatSheet" syncable="YES" codeGenerationType="class">
         <attribute name="behinds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -50,16 +68,19 @@
         <attribute name="opponentValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="statisticName" optional="YES" attributeType="String"/>
         <attribute name="teamValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="quarter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quarter" inverseName="statistics" inverseEntity="Quarter"/>
         <relationship name="teamRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamRecord" inverseName="teamStatistics" inverseEntity="TeamRecord"/>
     </entity>
     <elements>
-        <element name="IndividualRecord" positionX="117" positionY="36" width="128" height="88"/>
-        <element name="Match" positionX="108" positionY="36" width="128" height="119"/>
+        <element name="IndividualRecord" positionX="117" positionY="36" width="128" height="74"/>
+        <element name="Match" positionX="108" positionY="36" width="128" height="134"/>
+        <element name="MatchHistory" positionX="108" positionY="36" width="128" height="104"/>
         <element name="Player" positionX="-33.265625" positionY="102.4296875" width="128" height="88"/>
+        <element name="Quarter" positionX="117" positionY="45" width="128" height="119"/>
         <element name="Record" positionX="-71.98046875" positionY="-59.6953125" width="128" height="118"/>
-        <element name="Score" positionX="117" positionY="45" width="128" height="89"/>
+        <element name="Score" positionX="117" positionY="45" width="128" height="119"/>
         <element name="StatSheet" positionX="293.28125" positionY="72.30859375" width="128" height="148"/>
         <element name="TeamRecord" positionX="99.421875" positionY="-122.11328125" width="128" height="103"/>
-        <element name="TeamStatistic" positionX="108" positionY="36" width="128" height="103"/>
+        <element name="TeamStatistic" positionX="108" positionY="36" width="128" height="104"/>
     </elements>
 </model>
