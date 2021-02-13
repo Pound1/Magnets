@@ -22,7 +22,8 @@ class MatchDetailView: UIViewController  {
             guard let match = matchHistory else {return}
             //Set Date
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM"
+            dateFormatter.dateFormat = "dd/MMM/YY"
+            dateFormatter.dateStyle = .medium
             let dateString = dateFormatter.string(from: match.startTime ?? Date())
             informationView.detail1.value.text = dateString
             
@@ -122,6 +123,9 @@ class MatchDetailView: UIViewController  {
         view.addSubview(controlBook.view)
         controlBook.didMove(toParent: self)
         controlBook.view.translatesAutoresizingMaskIntoConstraints = false
+        guard var quarters = (matchHistory?.quarters?.allObjects as? [Quarter]) else {return}
+        quarters.sort { $0.number < $1.number}
+        controlBook.quarter = quarters[0]
         
     }
     private func setUpInformationView() {

@@ -16,12 +16,13 @@ class TimerPageVC: UIViewController {
         didSet {
             print("setting quarter in timer")
             // find the time and set the timerArray accordingly
-//            let timeOne
             if quarter?.startTime == nil {
                 timerArray = [["Start", "Not Started"],["End", "-"],["Total", "-"]]
             } else {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "HH:mm"
+                dateFormatter.dateFormat = "h:mm a"
+                dateFormatter.amSymbol = "am"
+                dateFormatter.pmSymbol = "pm"
                 guard let startTime = quarter?.startTime else {return}
                 let startTimeString = dateFormatter.string(from: startTime)
                 if quarter?.finishTime == nil {

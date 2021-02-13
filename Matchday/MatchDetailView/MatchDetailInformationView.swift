@@ -34,7 +34,7 @@ class MatchDetailInformationView: UIView {
     let detail2: MatchValues = {
         let detail = MatchValues()
         detail.label.text = "Mins"
-        detail.value.text = "2:12"
+        detail.value.text = "2:10"
         return detail
     }()
     

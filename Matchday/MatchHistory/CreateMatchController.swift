@@ -227,6 +227,7 @@ class CreateMatchController: UIViewController {
         matchHistory.startTime = quarter1.startTime
         matchHistory.finishTime = quarter4.finishTime
         match.history = matchHistory
+        match.result = "AFC WON"
         
         do {
             try context.save()

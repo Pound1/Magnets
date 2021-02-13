@@ -19,7 +19,19 @@ class MatchHistoryCell: UITableViewCell {
             
             
             resultLabel.text = match.result
-            if statusLabel.text != matchStatus.complete.rawValue {
+            if statusLabel.text == matchStatus.complete.rawValue {
+                guard let scores = match.history?.totalScore?.allObjects as? [Score] else {return}
+                for score in scores {
+                    let scoreLine = combineScore(goals: Int(score.goalTally), points: Int(score.pointTally))
+                    if score.teamType == "home" {
+                        homeResult.label.text = scoreLine
+                        homeResult.value.text = score.teamName
+                    } else if score.teamType == "away" {
+                        awayResult.label.text = scoreLine
+                        awayResult.value.text = score.teamName
+                    }
+                }
+            } else {
                 resultLabel.removeFromSuperview()
                 homeResult.label.text = ""
                 homeResult.value.text = ""
@@ -157,7 +169,15 @@ class MatchHistoryCell: UITableViewCell {
         ])
         showResultLabel()
     }
-    
+    func combineScore(goals: Int, points: Int) -> String {
+        var combinedScore = ""
+        let totalGoalScore = 6 * goals
+        let totalScore = String(totalGoalScore + points)
+        let goalString = String(goals)
+        let pointString = String(points)
+        combinedScore = "\(goalString).\(pointString) (\(totalScore))"
+        return combinedScore
+    }
     private func showResultLabel() {
         if resultLabel.text != nil {
             infoStack.addArrangedSubview(resultLabel)

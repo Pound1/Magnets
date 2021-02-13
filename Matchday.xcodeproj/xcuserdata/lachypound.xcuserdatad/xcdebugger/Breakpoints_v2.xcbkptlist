@@ -176,8 +176,8 @@
             filePath = "Matchday/MatchDetailView/MatchDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -192,8 +192,8 @@
             filePath = "Matchday/MatchHistory/CreateMatchController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "createMatch(status:homeTeam:awayTeam:location:date:)"
             landmarkType = "7">
          </BreakpointContent>
