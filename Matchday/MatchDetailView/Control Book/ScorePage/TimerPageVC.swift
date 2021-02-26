@@ -10,8 +10,10 @@ import UIKit
 
 class TimerPageVC: UIViewController {
     
+    let scoreCell = "scoreCell"
+    
     var timerArray = [["Start", "14:02"],["End", "14:34"],["Total", "32"]]
-    var scoreArray = [["GEAFC", "7.4 (48)"],["NFC", "4.6 (30)"]]
+    var scoreArray = [Score]()
     var quarter: Quarter? {
         didSet {
             print("setting quarter in timer")
@@ -36,27 +38,21 @@ class TimerPageVC: UIViewController {
                 }
             }
             // do the same for score
-            if quarter?.score == nil {
-                scoreArray = [["Home", "0.0 (0)"],["Away", "0.0 (0)"]]
-            } else {
-                guard let scores = quarter?.score?.allObjects as? [Score] else {return}
-                var sortedArray = [[String]]()
-                for score in scores {
-                    let scoreLine = combineScore(goals: Int(score.goalTally), points: Int(score.pointTally))
-//                    print("Quarter score is: ", scoreLine)
-                    switch score.teamType {
-                    case "home":
-                        sortedArray.insert(["\(score.teamName ?? "Home")", "\(scoreLine)"], at: 0)
-                    case "away":
-                        sortedArray.append(["\(score.teamName ?? "Away")", "\(scoreLine)"])
-                    case "mutual":
-                        sortedArray.append(["\(score.teamName ?? "Mutual")", "\(scoreLine)"])
-                    default:
-                        sortedArray.append(["\(score.teamName ?? "Default")", "\(scoreLine)"])
-                    }
+            var sortedArray = [Score]()
+            guard let scores = quarter?.score?.allObjects as? [Score] else {return}
+            for score in scores {
+                switch score.teamType {
+                case "home":
+                    sortedArray.insert(score, at: 0)
+                case "away":
+                    sortedArray.append(score)
+                case "mutual":
+                    sortedArray.append(score)
+                default:
+                    sortedArray.append(score)
                 }
-                scoreArray = sortedArray
             }
+            scoreArray = sortedArray
             tableView.reloadData()
         }
     }
@@ -97,6 +93,7 @@ class TimerPageVC: UIViewController {
 //        view.addSubview(clockImage)
         view.addSubview(tableView)
 //        view.addSubview(controllerPageTitle)
+        tableView.register(ScoreCellView.self, forCellReuseIdentifier: scoreCell)
     }
     
     private func addConstraints() {
@@ -145,8 +142,12 @@ extension TimerPageVC: UITableViewDataSource {
             cell.detailTextLabel?.text = timerArray[indexPath.row][1]
             cell.textLabel?.text = timerArray[indexPath.row][0]
         } else {
-            cell.detailTextLabel?.text = scoreArray[indexPath.row][1]
-            cell.textLabel?.text = scoreArray[indexPath.row][0]
+//            cell.detailTextLabel?.text = scoreArray[indexPath.row][1]
+//            cell.textLabel?.text = scoreArray[indexPath.row][0]
+            let cell = tableView.dequeueReusableCell(withIdentifier: scoreCell, for: indexPath) as! ScoreCellView
+            cell.score = scoreArray[indexPath.row]
+            cell.contentView.isUserInteractionEnabled = false
+            return cell
         }
         return cell
     }
@@ -157,15 +158,15 @@ extension TimerPageVC: UITableViewDataSource {
 
 extension TimerPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = ControlBookHeaderView()
         if section == 0 {
+            let headerView = ControlBookHeaderView()
             headerView.image.image = UIImage(imageLiteralResourceName: "Timer_2").withRenderingMode(.alwaysTemplate)
             headerView.title.text = "Timings"
+            return headerView
         } else {
-            headerView.image.image = UIImage(imageLiteralResourceName: "goal_posts").withRenderingMode(.alwaysTemplate)
-            headerView.title.text = "Scores"
+            let headerView = ScoreHeaderView()
+            return headerView
         }
-        return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60

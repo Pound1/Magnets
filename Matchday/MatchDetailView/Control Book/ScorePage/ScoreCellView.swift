@@ -1,81 +1,73 @@
 //
-//  StatisticTableViewCell.swift
+//  ScoreCellView.swift
 //  Matchday
 //
-//  Created by Lachy Pound on 5/1/21.
+//  Created by Lachy Pound on 25/2/21.
 //  Copyright © 2021 Lachy Pound. All rights reserved.
 //
 
 import UIKit
 
-class StatisticTableViewCell: UITableViewCell {
-    var statistic: TeamStatistic? {
+class ScoreCellView: UITableViewCell {
+    var score: Score? {
         didSet{
-            if let statisticData = statistic {
-                setCellValues()
-            }
+            setCellValues()
         }
     }
-    
     var statisticName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Statistic 1"
+        label.text = "AFC"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.numberOfLines = 2
         return label
     }()
-    var homeValue: UILabel = {
+    var goalScoreView: StatIncrementerView = {
+        let view = StatIncrementerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.type = statisticType.goal
+        return view
+    }()
+    var pointScoreView: StatIncrementerView = {
+        let view = StatIncrementerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.type = statisticType.point
+        return view
+    }()
+    var totalScoreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "5"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-//        label.textColor = .
+        label.text = "131"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .gray
         label.textAlignment = .center
         return label
     }()
-    var homeStatistic: StatIncrementerView = {
-        let view = StatIncrementerView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.type = statisticType.home
-        return view
-    }()
-    var awayStatistic: StatIncrementerView = {
-        let view = StatIncrementerView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.type = statisticType.away
-        return view
-    }()
-    var awayValue: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "4"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.textColor = .lightGray
-        label.textAlignment = .center
-        return label
-    }()
+
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [homeStatistic, awayStatistic])
+        let stack = UIStackView(arrangedSubviews: [goalScoreView, pointScoreView, totalScoreLabel])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .fillEqually
         return stack
     }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setUpCell()
     }
+    
     private func setUpCell() {
         addSubview(statisticName)
         addSubview(stackView)
         layoutCell()
-        homeStatistic.delegate = self
-        awayStatistic.delegate = self
+        goalScoreView.delegate = self
+        pointScoreView.delegate = self
     }
+    
     private func layoutCell() {
         NSLayoutConstraint.activate([
             statisticName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -87,31 +79,26 @@ class StatisticTableViewCell: UITableViewCell {
             stackView.bottomAnchor.constraint(equalTo: statisticName.bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            homeStatistic.topAnchor.constraint(equalTo: statisticName.topAnchor),
-            homeStatistic.bottomAnchor.constraint(equalTo: statisticName.bottomAnchor),
-            awayStatistic.topAnchor.constraint(equalTo: statisticName.topAnchor),
-            awayStatistic.bottomAnchor.constraint(equalTo: statisticName.bottomAnchor),
+            goalScoreView.topAnchor.constraint(equalTo: statisticName.topAnchor),
+            goalScoreView.bottomAnchor.constraint(equalTo: goalScoreView.bottomAnchor),
+            pointScoreView.topAnchor.constraint(equalTo: goalScoreView.topAnchor),
+            pointScoreView.bottomAnchor.constraint(equalTo: goalScoreView.bottomAnchor),
+            totalScoreLabel.topAnchor.constraint(equalTo: goalScoreView.topAnchor),
+            totalScoreLabel.bottomAnchor.constraint(equalTo: goalScoreView.bottomAnchor),
         ])
     }
-    private func setCellValues() {
-        guard let statisticData = statistic else {return}
-        statisticName.text = statisticData.statisticName
-//        homeValue.text = String(statisticData.teamValue)
-//        awayValue.text = String(statisticData.opponentValue)
-        homeStatistic.statValue = Int(statisticData.teamValue)
-        awayStatistic.statValue = Int(statisticData.opponentValue)
-        if statisticData.opponentValue > statisticData.teamValue {
-            homeStatistic.statLabel.textColor = .lightGray
-            awayStatistic.statLabel.textColor = .black
-        } else if statisticData.opponentValue == statisticData.teamValue {
-            homeStatistic.statLabel.textColor = .lightGray
-            awayStatistic.statLabel.textColor = .lightGray
-        } else {
-            homeStatistic.statLabel.textColor = .black
-            awayStatistic.statLabel.textColor = .lightGray
-//            homeValue.textColor = .black
-//            awayValue.textColor = .lightGray
-        }
+    
+    private func setCellValues(){
+        guard let score = score else {return}
+        statisticName.text = score.teamName
+        let goalTally = Int(score.goalTally)
+        let pointTally = Int(score.pointTally)
+        
+        goalScoreView.statValue = goalTally
+        pointScoreView.statValue = pointTally
+        
+        let totalScore = (6*goalTally) + pointTally
+        totalScoreLabel.text = String(totalScore)
     }
     
     required init?(coder: NSCoder) {
@@ -119,18 +106,18 @@ class StatisticTableViewCell: UITableViewCell {
     }
 }
 
-extension StatisticTableViewCell: IncrementAndDecrementDelegate {
+extension ScoreCellView: IncrementAndDecrementDelegate {
     func decrement(type: statisticType) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         switch type {
-        case statisticType.home:
+        case statisticType.goal:
             print("Dec", type)
-            statistic?.teamValue -= 1
-        case statisticType.away:
+            score?.goalTally -= 1
+        case statisticType.point:
             print("dec", type)
-            statistic?.opponentValue -= 1
+            score?.pointTally -= 1
         default:
-            print("Couldn't decrement statistic.")
+            print("Couldn't decrement score.")
         }
         setCellValues()
         do {
@@ -143,14 +130,14 @@ extension StatisticTableViewCell: IncrementAndDecrementDelegate {
     func increment(type: statisticType) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         switch type {
-        case statisticType.home:
+        case statisticType.goal:
             print("Incrementing", type)
-            statistic?.teamValue += 1
-        case statisticType.away:
+            score?.goalTally += 1
+        case statisticType.point:
             print("Incrementing", type)
-            statistic?.opponentValue += 1
+            score?.pointTally += 1
         default:
-            print("Couldn't increment statistic.")
+            print("Couldn't increment score.")
         }
         setCellValues()
         do {

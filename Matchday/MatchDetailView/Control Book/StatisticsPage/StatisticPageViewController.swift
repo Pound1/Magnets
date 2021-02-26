@@ -108,6 +108,7 @@ extension StatisticPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = StatisticTableViewCell(style: .default, reuseIdentifier: "cellID")
         cell.statistic = statisticArray[indexPath.row]
+        cell.contentView.isUserInteractionEnabled = false
         return cell
     }
 }

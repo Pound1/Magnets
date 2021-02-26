@@ -34,7 +34,7 @@ class MatchDetailInformationView: UIView {
     let detail2: MatchValues = {
         let detail = MatchValues()
         detail.label.text = "Mins"
-        detail.value.text = "2:10"
+        detail.value.text = "2:11"
         return detail
     }()
     
@@ -53,12 +53,10 @@ class MatchDetailInformationView: UIView {
     }()
     
     lazy var stackView: UIStackView = {
-//        let stack = UIStackView(arrangedSubviews: [cellTitle, scoreTeam, scoreOpponent, quarterLength])
         let stack = UIStackView(arrangedSubviews: [detail1, detail2, detail3, detail4])
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
-//        stack.backgroundColor = .purple
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -147,7 +145,7 @@ class MatchValues: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Value 3"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.textColor = .white

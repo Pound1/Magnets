@@ -115,6 +115,7 @@ class MatchDetailView: UIViewController  {
         setUpInformationView()
         setUpCollectionView()
         setUpControlBook()
+        setUpNavigationBarItems()
 //        setUpTableView()
         activateConstraints()
     }
@@ -128,10 +129,24 @@ class MatchDetailView: UIViewController  {
         controlBook.quarter = quarters[0]
         
     }
+    private func setUpNavigationBarItems() {
+        let editButton = UIButton(type: .system)
+        editButton.setImage(#imageLiteral(resourceName: "edit_icon").withRenderingMode(.alwaysTemplate), for: .normal)
+//        editButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        editButton.contentMode = .scaleAspectFit
+        editButton.tintColor = .white
+        editButton.addTarget(self, action: #selector(tappedEditButton), for: .touchUpInside)
+        editButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        editButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
+    }
     private func setUpInformationView() {
         view.addSubview(informationView)
         view.addSubview(seperatorView)
         view.addSubview(whiteBackdropForCustomTabBar)
+    }
+    @objc func tappedEditButton() {
+        print("Tapped edit button")
     }
     private func setUpCollectionView() {
         view.addSubview(collectionView)
@@ -150,6 +165,7 @@ class MatchDetailView: UIViewController  {
     }
     private func activateConstraints() {
 //        let definedThird = view.frame.height/3
+//        view.addSubview(editBarButtonImage)
         NSLayoutConstraint.activate([
             
             informationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

@@ -106,7 +106,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C8C7AC2A-92EF-473B-8435-86C769982CE5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Matchday/Player List/AddNewPlayerController.swift"
@@ -176,8 +176,8 @@
             filePath = "Matchday/MatchDetailView/MatchDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -195,6 +195,22 @@
             startingLineNumber = "293"
             endingLineNumber = "293"
             landmarkName = "createMatch(status:homeTeam:awayTeam:location:date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C917372E-1AA6-4578-8526-D2332985053C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Matchday/MatchDetailView/Control Book/StatIncrementerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "incrementStatCount()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

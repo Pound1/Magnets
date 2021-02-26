@@ -19,3 +19,10 @@ enum groundAdvantage: String, Codable {
     case away = "away"
     case mutual = "mutual"
 }
+
+enum statisticType: String, Codable {
+    case goal = "goal"
+    case point = "point"
+    case home = "home"
+    case away = "away"
+}
